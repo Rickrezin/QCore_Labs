@@ -1,0 +1,119 @@
+Category,Element,Symbol,AtomicMass,NumberofNeutrons,NumberofProtons,NumberofElectrons,Period,Group,Phase,Radioactive,Natural,Metal,Nonmetal,Metalloid,Type,AtomicRadius,Electronegativity,FirstIonization,Density,MeltingPoint,BoilingPoint,NumberOfIsotopes,SpecificHeat,NumberofShells,NumberofValence
+Con,Hydrogen,H,1.007,0,1,1,1,1,gas,,yes,,yes,,Nonmetal,0.79,2.2,13.5984,8.99E-05,14.175,20.28,3,14.304,1,1
+Div,Helium,He,4.002,2,2,2,1,18,gas,,yes,,yes,,Noble Gas,0.49,,24.5874,1.79E-04,,4.22,5,5.193,1,
+Off,Lithium,Li,6.941,4,3,3,2,1,solid,,yes,yes,,,Alkali Metal,2.1,0.98,5.3917,5.34E-01,453.85,1615,5,3.582,2,1
+Neu,Beryllium,Be,9.012,5,4,4,2,2,solid,,yes,yes,,,Alkaline Earth Metal,1.4,1.57,9.3227,1.85E+00,1560.15,2742,6,1.825,2,2
+Div,Boron,B,10.811,6,5,5,2,13,solid,,yes,,,yes,Metalloid,1.2,2.04,8.298,2.34E+00,2573.15,4200,6,1.026,2,3
+Con,Carbon,C,12.011,6,6,6,2,14,solid,,yes,,yes,,Nonmetal,0.91,2.55,11.2603,2.27E+00,3948.15,4300,7,0.709,2,4
+Off,Nitrogen,N,14.007,7,7,7,2,15,gas,,yes,,yes,,Nonmetal,0.75,3.04,14.5341,1.25E-03,63.29,77.36,8,1.04,2,5
+Ret,Oxygen,O,15.999,8,8,8,2,16,gas,,yes,,yes,,Nonmetal,0.65,3.44,13.6181,1.43E-03,50.5,90.2,8,0.918,2,6
+Div,Fluorine,F,18.998,10,9,9,2,17,gas,,yes,,yes,,Halogen,0.57,3.98,17.4228,1.70E-03,53.63,85.03,6,0.824,2,7
+Div,Neon,Ne,20.18,10,10,10,2,18,gas,,yes,,yes,,Noble Gas,0.51,,21.5645,9.00E-04,24.703,27.07,8,1.03,2,8
+Neu,Sodium,Na,22.99,12,11,11,3,1,solid,,yes,yes,,,Alkali Metal,2.2,0.93,5.1391,9.71E-01,371.15,1156,7,1.228,3,1
+Neu,Magnesium,Mg,24.305,12,12,12,3,2,solid,,yes,yes,,,Alkaline Earth Metal,1.7,1.31,7.6462,1.74E+00,923.15,1363,8,1.023,3,2
+Off,Aluminum,Al,26.982,14,13,13,3,13,solid,,yes,yes,,,Metal,1.8,1.61,5.9858,2.70E+00,933.4,2792,8,0.897,3,3
+Div,Silicon,Si,28.086,14,14,14,3,14,solid,,yes,,,yes,Metalloid,1.5,1.9,8.1517,2.33E+00,1683.15,3538,8,0.705,3,4
+Off,Phosphorus,P,30.974,16,15,15,3,15,solid,,yes,,yes,,Nonmetal,1.2,2.19,10.4867,1.82E+00,317.25,553,7,0.769,3,5
+Con,Sulfur,S,32.065,16,16,16,3,16,solid,,yes,,yes,,Nonmetal,1.1,2.58,10.36,2.07E+00,388.51,717.8,10,0.71,3,6
+Div,Chlorine,Cl,35.453,18,17,17,3,17,gas,,yes,,yes,,Halogen,0.97,3.16,12.9676,3.21E-03,172.31,239.11,11,0.479,3,7
+Neu,Argon,Ar,39.948,22,18,18,3,18,gas,,yes,,yes,,Noble Gas,0.88,,15.7596,1.78E-03,83.96,87.3,8,0.52,3,8
+Off,Potassium,K,39.098,20,19,19,4,1,solid,,yes,yes,,,Alkali Metal,2.8,0.82,4.3407,8.62E-01,336.5,1032,10,0.757,4,1
+Neu,Calcium,Ca,40.078,20,20,20,4,2,solid,,yes,yes,,,Alkaline Earth Metal,2.2,1,6.1132,1.54E+00,1112.15,1757,14,0.647,4,2
+Off,Scandium,Sc,44.956,24,21,21,4,3,solid,,yes,yes,,,Transition Metal,2.1,1.36,6.5615,2.99E+00,1812.15,3109,15,0.568,4,
+Con,Titanium,Ti,47.867,26,22,22,4,4,solid,,yes,yes,,,Transition Metal,2,1.54,6.8281,4.54E+00,1933.15,3560,9,0.523,4,
+Off,Vanadium,V,50.942,28,23,23,4,5,solid,,yes,yes,,,Transition Metal,1.9,1.63,6.7462,6.11E+00,2175.15,3680,9,0.489,4,
+Con,Chromium,Cr,51.996,28,24,24,4,6,solid,,yes,yes,,,Transition Metal,1.9,1.66,6.7665,7.15E+00,2130.15,2944,9,0.449,4,
+Off,Manganese,Mn,54.938,30,25,25,4,7,solid,,yes,yes,,,Transition Metal,1.8,1.55,7.434,7.44E+00,1519.15,2334,11,0.479,4,
+Con,Iron,Fe,55.845,30,26,26,4,8,solid,,yes,yes,,,Transition Metal,1.7,1.83,7.9024,7.87E+00,1808.15,3134,10,0.449,4,
+Off,Cobalt,Co,58.933,32,27,27,4,9,solid,,yes,yes,,,Transition Metal,1.7,1.88,7.881,8.86E+00,1768.15,3200,14,0.421,4,
+Neu,Nickel,Ni,58.693,31,28,28,4,10,solid,,yes,yes,,,Transition Metal,1.6,1.91,7.6398,8.91E+00,1726.15,3186,11,0.444,4,
+Div,Copper,Cu,63.546,35,29,29,4,11,solid,,yes,yes,,,Transition Metal,1.6,1.9,7.7264,8.96E+00,1357.75,2835,11,0.385,4,
+Off,Zinc,Zn,65.38,35,30,30,4,12,solid,,yes,yes,,,Transition Metal,1.5,1.65,9.3942,7.13E+00,692.88,1180,15,0.388,4,
+Off,Gallium,Ga,69.723,39,31,31,4,13,solid,,yes,yes,,,Metal,1.8,1.81,5.9993,5.91E+00,302.91,2477,14,0.371,4,3
+Div,Germanium,Ge,72.64,41,32,32,4,14,solid,,yes,,,yes,Metalloid,1.5,2.01,7.8994,5.32E+00,1211.45,3106,17,0.32,4,4
+Off,Arsenic,As,74.922,42,33,33,4,15,solid,,yes,,,yes,Metalloid,1.3,2.18,9.7886,5.78E+00,1090.15,887,14,0.329,4,5
+Ret,Selenium,Se,78.96,45,34,34,4,16,solid,,yes,,yes,,Nonmetal,1.2,2.55,9.7524,4.81E+00,494.15,958,20,0.321,4,6
+Div,Bromine,Br,79.904,45,35,35,4,17,liq,,yes,,yes,,Halogen,1.1,2.96,11.8138,3.12E+00,266.05,332,19,0.474,4,7
+Div,Krypton,Kr,83.798,48,36,36,4,18,gas,,yes,,yes,,Noble Gas,1,,13.9996,3.73E-03,115.93,119.93,23,0.248,4,8
+Off,Rubidium,Rb,85.468,48,37,37,5,1,solid,,yes,yes,,,Alkali Metal,3,0.82,4.1771,1.53E+00,312.79,961,20,0.363,5,1
+Neu,Strontium,Sr,87.62,50,38,38,5,2,solid,,yes,yes,,,Alkaline Earth Metal,2.5,0.95,5.6949,2.64E+00,1042.15,1655,18,0.301,5,2
+Off,Yttrium,Y,88.906,50,39,39,5,3,solid,,yes,yes,,,Transition Metal,2.3,1.22,6.2173,4.47E+00,1799.15,3609,21,0.298,5,
+Con,Zirconium,Zr,91.224,51,40,40,5,4,solid,,yes,yes,,,Transition Metal,2.2,1.33,6.6339,6.51E+00,2125.15,4682,20,0.278,5,
+Off,Niobium,Nb,92.906,52,41,41,5,5,solid,,yes,yes,,,Transition Metal,2.1,1.6,6.7589,8.57E+00,2741.15,5017,24,0.265,5,
+Con,Molybdenum,Mo,95.96,54,42,42,5,6,solid,,yes,yes,,,Transition Metal,2,2.16,7.0924,1.02E+01,2890.15,4912,20,0.251,5,
+Anom,Technetium,Tc,98,55,43,43,5,7,artificial,yes,,yes,,,Transition Metal,2,1.9,7.28,1.15E+01,2473.15,5150,23,,5,
+Con,Ruthenium,Ru,101.07,57,44,44,5,8,solid,,yes,yes,,,Transition Metal,1.9,2.2,7.3605,1.24E+01,2523.15,4423,16,0.238,5,
+Off,Rhodium,Rh,102.906,58,45,45,5,9,solid,,yes,yes,,,Transition Metal,1.8,2.28,7.4589,1.24E+01,2239.15,3968,20,0.243,5,
+Con,Palladium,Pd,106.42,60,46,46,5,10,solid,,yes,yes,,,Transition Metal,1.8,2.2,8.3369,1.20E+01,1825.15,3236,21,0.244,5,
+Con,Silver,Ag,107.868,61,47,47,5,11,solid,,yes,yes,,,Transition Metal,1.8,1.93,7.5762,1.05E+01,1234.15,2435,27,0.235,5,
+Off,Cadmium,Cd,112.411,64,48,48,5,12,solid,,yes,yes,,,Transition Metal,1.7,1.69,8.9938,8.69E+00,594.33,1040,22,0.232,5,
+Off,Indium,In,114.818,66,49,49,5,13,solid,,yes,yes,,,Metal,2,1.78,5.7864,7.31E+00,429.91,2345,34,0.233,5,3
+Ret,Tin,Sn,118.71,69,50,50,5,14,solid,,yes,yes,,,Metal,1.7,1.96,7.3439,7.29E+00,505.21,2875,28,0.228,5,4
+Off,Antimony,Sb,121.76,71,51,51,5,15,solid,,yes,,,yes,Metalloid,1.5,2.05,8.6084,6.69E+00,904.05,1860,29,0.207,5,5
+Ret,Tellurium,Te,127.6,76,52,52,5,16,solid,,yes,,,yes,Metalloid,1.4,2.1,9.0096,6.23E+00,722.8,1261,29,0.202,5,6
+Ret,Iodine,I,126.904,74,53,53,5,17,solid,,yes,,yes,,Halogen,1.3,2.66,10.4513,4.93E+00,386.65,457.4,24,0.214,5,7
+Div,Xenon,Xe,131.293,77,54,54,5,18,gas,,yes,,yes,,Noble Gas,1.2,,12.1298,5.89E-03,161.45,165.03,31,0.158,5,8
+Off,Cesium,Cs,132.905,78,55,55,6,1,solid,,yes,yes,,,Alkali Metal,3.3,0.79,3.8939,1.87E+00,301.7,944,22,0.242,6,1
+Neu,Barium,Ba,137.327,81,56,56,6,2,solid,,yes,yes,,,Alkaline Earth Metal,2.8,0.89,5.2117,3.59E+00,1002.15,2170,25,0.204,6,2
+Off,Lanthanum,La,138.905,82,57,57,6,3,solid,,yes,yes,,,Lanthanide,2.7,1.1,5.5769,6.15E+00,1193.15,3737,19,0.195,6,
+Ret,Cerium,Ce,140.116,82,58,58,6,,solid,,yes,yes,,,Lanthanide,2.7,1.12,5.5387,6.77E+00,1071.15,3716,19,0.192,6,
+Off,Praseodymium,Pr,140.908,82,59,59,6,,solid,,yes,yes,,,Lanthanide,2.7,1.13,5.473,6.77E+00,1204.15,3793,15,0.193,6,
+Off,Neodymium,Nd,144.242,84,60,60,6,,solid,,yes,yes,,,Lanthanide,2.6,1.14,5.525,7.01E+00,1289.15,3347,16,0.19,6,
+Anom,Promethium,Pm,145,84,61,61,6,,artificial,yes,,yes,,,Lanthanide,2.6,1.13,5.582,7.26E+00,1204.15,3273,14,,6,
+Ret,Samarium,Sm,150.36,88,62,62,6,,solid,,yes,yes,,,Lanthanide,2.6,1.17,5.6437,7.52E+00,1345.15,2067,17,0.197,6,
+Ret,Europium,Eu,151.964,89,63,63,6,,solid,,yes,yes,,,Lanthanide,2.6,1.2,5.6704,5.24E+00,1095.15,1802,21,0.182,6,
+Off,Gadolinium,Gd,157.25,93,64,64,6,,solid,,yes,yes,,,Lanthanide,2.5,1.2,6.1501,7.90E+00,1585.15,3546,17,0.236,6,
+Off,Terbium,Tb,158.925,94,65,65,6,,solid,,yes,yes,,,Lanthanide,2.5,1.2,5.8638,8.23E+00,1630.15,3503,24,0.182,6,
+Ret,Dysprosium,Dy,162.5,97,66,66,6,,solid,,yes,yes,,,Lanthanide,2.5,1.22,5.9389,8.55E+00,1680.15,2840,21,0.17,6,
+Off,Holmium,Ho,164.93,98,67,67,6,,solid,,yes,yes,,,Lanthanide,2.5,1.23,6.0215,8.80E+00,1743.15,2993,29,0.165,6,
+Ret,Erbium,Er,167.259,99,68,68,6,,solid,,yes,yes,,,Lanthanide,2.5,1.24,6.1077,9.07E+00,1795.15,3503,16,0.168,6,
+Off,Thulium,Tm,168.934,100,69,69,6,,solid,,yes,yes,,,Lanthanide,2.4,1.25,6.1843,9.32E+00,1818.15,2223,18,0.16,6,
+Neu,Ytterbium,Yb,173.054,103,70,70,6,,solid,,yes,yes,,,Lanthanide,2.4,1.1,6.2542,6.97E+00,1097.15,1469,16,0.155,6,
+Off,Lutetium,Lu,174.967,104,71,71,6,,solid,,yes,yes,,,Lanthanide,2.3,1.27,5.4259,9.84E+00,1936.15,3675,22,0.154,6,
+Con,Hafnium,Hf,178.49,106,72,72,6,4,solid,,yes,yes,,,Transition Metal,2.2,1.3,6.8251,1.33E+01,2500.15,4876,17,0.144,6,
+Off,Tantalum,Ta,180.948,108,73,73,6,5,solid,,yes,yes,,,Transition Metal,2.1,1.5,7.5496,1.67E+01,3269.15,5731,19,0.14,6,
+Con,Wolfram,W,183.84,110,74,74,6,6,solid,,yes,yes,,,Transition Metal,2,2.36,7.864,1.93E+01,3680.15,5828,22,0.132,6,
+Off,Rhenium,Re,186.207,111,75,75,6,7,solid,,yes,yes,,,Transition Metal,2,1.9,7.8335,2.10E+01,3453.15,5869,21,0.137,6,
+Con,Osmium,Os,190.23,114,76,76,6,8,solid,,yes,yes,,,Transition Metal,1.9,2.2,8.4382,2.26E+01,3300.15,5285,19,0.13,6,
+Con,Iridium,Ir,192.217,115,77,77,6,9,solid,,yes,yes,,,Transition Metal,1.9,2.2,8.967,2.26E+01,2716.15,4701,25,0.131,6,
+Con,Platinum,Pt,195.084,117,78,78,6,10,solid,,yes,yes,,,Transition Metal,1.8,2.28,8.9587,2.15E+01,2045.15,4098,32,0.133,6,
+Con,Gold,Au,196.967,118,79,79,6,11,solid,,yes,yes,,,Transition Metal,1.8,2.54,9.2255,1.93E+01,1337.73,3129,21,0.129,6,
+Anom,Mercury,Hg,200.59,121,80,80,6,12,liq,,yes,yes,,,Transition Metal,1.8,2,10.4375,1.35E+01,234.43,630,26,0.14,6,
+Off,Thallium,Tl,204.383,123,81,81,6,13,solid,,yes,yes,,,Metal,2.1,2.04,6.1082,1.19E+01,577.15,1746,28,0.129,6,3
+Anom,Lead,Pb,207.2,125,82,82,6,14,solid,,yes,yes,,,Metal,1.8,2.33,7.4167,1.13E+01,600.75,2022,29,0.129,6,4
+Off,Bismuth,Bi,208.98,126,83,83,6,15,solid,,yes,yes,,,Metal,1.6,2.02,7.2856,9.81E+00,544.67,1837,19,0.122,6,5
+Anom,Polonium,Po,210,126,84,84,6,16,solid,yes,yes,,,yes,Metalloid,1.5,2,8.417,9.32E+00,527.15,1235,34,,6,6
+Anom,Astatine,At,210,125,85,85,6,17,solid,yes,yes,,yes,,Noble Gas,1.4,2.2,9.3,7.00E+00,575.15,610,21,,6,7
+Div,Radon,Rn,222,136,86,86,6,18,gas,yes,yes,yes,,,Alkali Metal,1.3,,10.7485,9.73E-03,202.15,211.3,20,0.094,6,8
+Anom,Francium,Fr,223,136,87,87,7,1,solid,yes,yes,yes,,,Alkaline Earth Metal,,0.7,4.0727,1.87E+00,300.15,950,21,,7,1
+Off,Radium,Ra,226,138,88,88,7,2,solid,yes,yes,yes,,,Actinide,,0.9,5.2784,5.50E+00,973.15,2010,15,,7,2
+Off,Actinium,Ac,227,138,89,89,7,3,solid,yes,yes,yes,,,Actinide,,1.1,5.17,1.01E+01,1323.15,3471,11,0.12,7,
+Off,Thorium,Th,232.038,142,90,90,7,,solid,yes,yes,yes,,,Actinide,,1.3,6.3067,1.17E+01,2028.15,5061,12,0.113,7,
+Off,Protactinium,Pa,231.036,140,91,91,7,,solid,yes,yes,yes,,,Actinide,,1.5,5.89,1.54E+01,1873.15,4300,14,,7,
+Off,Uranium,U,238.029,146,92,92,7,,solid,yes,yes,yes,,,Actinide,,1.38,6.1941,1.90E+01,1405.15,4404,15,0.116,7,
+Anom,Neptunium,Np,237,144,93,93,7,,artificial,yes,,yes,,,Actinide,,1.36,6.2657,2.05E+01,913.15,4273,153,,7,
+Anom,Plutonium,Pu,244,150,94,94,7,,artificial,yes,,yes,,,Actinide,,1.28,6.0262,1.98E+01,913.15,3501,163,,7,
+Anom,Americium,Am,243,148,95,95,7,,artificial,yes,,yes,,,Actinide,,1.3,5.9738,1.37E+01,1267.15,2880,133,,7,
+Anom,Curium,Cm,247,151,96,96,7,,artificial,yes,,yes,,,Actinide,,1.3,5.9915,1.35E+01,1340.15,3383,133,,7,
+Anom,Berkelium,Bk,247,150,97,97,7,,artificial,yes,,yes,,,Actinide,,1.3,6.1979,1.48E+01,1259.15,983,83,,7,
+Anom,Californium,Cf,251,153,98,98,7,,artificial,yes,,yes,,,Actinide,,1.3,6.2817,1.51E+01,1925.15,1173,123,,7,
+Anom,Einsteinium,Es,252,153,99,99,7,,artificial,yes,,yes,,,Actinide,,1.3,6.42,1.35E+01,1133.15,,123,,7,
+Anom,Fermium,Fm,257,157,100,100,7,,artificial,yes,,yes,,,Actinide,,1.3,6.5,,,,103,,7,
+Anom,Mendelevium,Md,258,157,101,101,7,,artificial,yes,,yes,,,Actinide,,1.3,6.58,,,,33,,7,
+Off,Nobelium,No,259,157,102,102,7,,artificial,yes,,yes,,,Actinide,,1.3,6.65,,,,73,,7,
+Off,Lawrencium,Lr,262,159,103,103,7,,artificial,yes,,yes,,,Actinide,,,,,,,203,,7,
+Off,Rutherfordium,Rf,261,157,104,104,7,4,artificial,yes,,yes,,,Transactinide,,,,1.81E+01,,,,,7,
+Anom,Dubnium,Db,262,157,105,105,7,5,artificial,yes,,yes,,,Transactinide,,,,3.90E+01,,,,,7,
+Off,Seaborgium,Sg,266,160,106,106,7,6,artificial,yes,,yes,,,Transactinide,,,,3.50E+01,,,,,7,
+Anom,Bohrium,Bh,264,157,107,107,7,7,artificial,yes,,yes,,,Transactinide,,,,3.70E+01,,,,,7,
+Off,Hassium,Hs,267,159,108,108,7,8,artificial,yes,,yes,,,Transactinide,,,,4.10E+01,,,,,7,
+Anom,Meitnerium,Mt,268,159,109,109,7,9,artificial,yes,,yes,,,Transactinide,,,,3.50E+01,,,,,7,
+Anom,Darmstadtium,Ds,271,161,110,110,7,10,artificial,yes,,yes,,,Transactinide,,,,,,,,,7,
+Off,Roentgenium,Rg,272,161,111,111,7,11,artificial,yes,,yes,,,Transactinide,,,,,,,,,7,
+Anom,Copernicium,Cn,285,173,112,112,7,12,artificial,yes,,yes,,,Transactinide,,,,,,,,,7,
+Anom,Nihonium,Nh,284,171,113,113,7,13,artificial,yes,,yes,,,,,,,,,,,,7,3
+Anom,Flerovium,Fl,289,175,114,114,7,14,artificial,yes,,yes,,,Transactinide,,,,,,,,,7,4
+Anom,Moscovium,Mc,288,173,115,115,7,15,artificial,yes,,yes,,,,,,,,,,,,7,5
+Anom,Livermorium,Lv,292,176,116,116,7,16,artificial,yes,,yes,,,Transactinide,,,,,,,,,7,6
+Anom,Tennessine,Ts,295,178,117,117,7,17,artificial,yes,,,yes,,,,,,,,,,,7,7
+Anom,Oganesson,Og,294,176,118,118,7,18,artificial,yes,,,yes,,Noble Gas,,,,,,,,,7,8
