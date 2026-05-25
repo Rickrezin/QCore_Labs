@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Graviton Analysis - phi-Resonance Framework | QCore Labs</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#04080f;color:#c8dde8;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(13,32,53,.25) 40px),
+               repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(13,32,53,.25) 40px);z-index:0;}
+  .wrap{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:40px 24px 72px;}
+  header{margin-bottom:40px;}
+  .lab-tag{font-family:'Courier New',monospace;font-size:11px;color:#3a5068;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+  h1{font-size:clamp(16px,3vw,26px);font-weight:700;color:#fff;letter-spacing:.04em;margin-bottom:6px;}
+  h1 .phi{color:#3dd6f5;} h1 .grav{color:#e8c84a;}
+  .sub{font-family:'Courier New',monospace;font-size:11px;color:#3a5068;letter-spacing:2px;}
+  .sec{margin-bottom:40px;}
+  .sec-label{font-family:'Courier New',monospace;font-size:10px;letter-spacing:3px;color:#3a5068;
+    text-transform:uppercase;border-bottom:1px solid #0d2035;padding-bottom:6px;margin-bottom:16px;}
+  .sec-label span{color:#3dd6f5;}
+  .tbl-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-family:'Courier New',monospace;font-size:13px;}
+  th{background:#080e1a;color:#3a5068;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+     padding:9px 14px;text-align:right;border-bottom:1px solid #0d2035;white-space:nowrap;}
+  th:first-child{text-align:left;}
+  td{padding:7px 14px;text-align:right;border-bottom:1px solid rgba(13,32,53,.6);color:#c8dde8;}
+  td:first-child{text-align:left;color:#7a9ab0;}
+  tr:hover td{background:rgba(61,214,245,.04);}
+  td.good{color:#3dd6f5;} td.bad{color:#ff4f6d;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-bottom:24px;}
+  .card{background:#080e1a;border:1px solid #0d2035;border-top:2px solid #3dd6f5;padding:14px 16px;}
+  .card.warn{border-top-color:#ff4f6d;} .card.gold{border-top-color:#e8c84a;}
+  .card-label{font-family:'Courier New',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#3a5068;margin-bottom:6px;}
+  .card-val{font-family:'Courier New',monospace;font-size:16px;color:#fff;font-weight:700;}
+  .card-sub{font-family:'Courier New',monospace;font-size:11px;color:#3a5068;margin-top:4px;}
+  .verdict{background:#080e1a;border:1px solid #0d2035;border-left:3px solid #3dd6f5;padding:20px 22px;}
+  .verdict-title{font-family:'Courier New',monospace;font-size:11px;color:#3dd6f5;letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:12px;}
+  .verdict p{margin-bottom:10px;font-size:14px;line-height:1.8;}
+  .verdict p:last-child{margin-bottom:0;}
+  .hi{color:#3dd6f5;} .warn-t{color:#ff4f6d;} .gold-t{color:#e8c84a;}
+  .note{font-family:'Courier New',monospace;font-size:11px;color:#3a5068;margin-top:8px;}
+  .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:600px){.summary-grid{grid-template-columns:1fr;}}
+  .summary-item{background:#080e1a;border:1px solid #0d2035;padding:14px 16px;font-family:'Courier New',monospace;font-size:12px;color:#7a9ab0;line-height:1.7;}
+  .summary-item b{color:#3dd6f5;display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+  footer{margin-top:48px;font-family:'Courier New',monospace;font-size:10px;color:#1e3347;
+    letter-spacing:2px;text-align:center;}
+</style>
+</head>
+<body>
+<div class='wrap'>
+<header>
+  <div class='lab-tag'>QCore Labs &mdash; phi-Resonance Framework &mdash; Graviton Analysis</div>
+  <h1><span class='grav'>Graviton Analysis</span> &mdash; <span class='phi'>phi-Resonance</span> Framework</h1>
+  <div class='sub'>Gravity anchor: 10&sup1;&sup2; Hz &nbsp;|&nbsp; BH floor: 10&sup3;&#8320; Hz &nbsp;|&nbsp; phi = 1.6180339887</div>
+</header>
+<div class='sec'>
+  <div class='sec-label'>Test <span>01</span> &mdash; Graviton Energy at Each Anchor</div>
+  <div class='tbl-wrap'><table>
+    <thead><tr><th>Force</th><th>Freq (Hz)</th><th>Rung n*</th><th>E_J (J)</th><th>E (eV)</th><th>Period</th></tr></thead>
+    <tbody><tr><td>Gravity (THz)</td><td>1.00e+12</td><td>61.239</td><td>4.1634e-09</td><td>2.5989e+10</td><td>0.000 sec</td></tr>
+<tr><td>Black Hole floor</td><td>1.00e-30</td><td>-139.730</td><td>4.1634e-93</td><td>2.5989e-74</td><td>10^30.0 sec</td></tr>
+<tr><td>Strong Nuclear</td><td>1.00e+23</td><td>113.874</td><td>4.1634e+13</td><td>2.5989e+32</td><td>0.000 sec</td></tr>
+<tr><td>Electromagnetic</td><td>1.00e+15</td><td>75.594</td><td>4.1634e-03</td><td>2.5989e+16</td><td>0.000 sec</td></tr>
+<tr><td>Weak Nuclear</td><td>1.00e+10</td><td>51.669</td><td>4.1634e-13</td><td>2.5989e+06</td><td>0.000 sec</td></tr>
+</tbody>
+  </table></div>
+  <div class='note'>E_J = hbar * 2*pi*f * phi^n* -- Jackson energy at the self-anchored rung for each force.</div>
+</div>
+<div class='sec'>
+  <div class='sec-label'>Test <span>02</span> &mdash; Graviton Mass Bound</div>
+  <div class='cards'>
+    <div class='card gold'><div class='card-label'>E_min at gravity anchor</div><div class='card-val'>1.0721e-21 J</div><div class='card-sub'>6.6926e-03 eV</div></div>
+    <div class='card gold'><div class='card-label'>m_min at gravity anchor</div><div class='card-val'>1.1913e-38 kg</div><div class='card-sub'>5.4714e-31 x m_Planck</div></div>
+    <div class='card'><div class='card-label'>Compton wavelength</div><div class='card-val'>2.9509e-05 m</div><div class='card-sub'>Max range of gravity</div></div>
+    <div class='card warn'><div class='card-label'>Standard QFT mass</div><div class='card-val'>Exactly 0</div><div class='card-sub'>phi-Framework: NONZERO -- prediction</div></div>
+  </div>
+  <div class='note'>The phi-ladder has a hard floor at n=1. Zero energy is only reached asymptotically as n &rarr; &minus;&infin;, never at a finite rung. Graviton mass = 0 is geometrically inadmissible.</div>
+</div>
+<div class='sec'>
+  <div class='sec-label'>Test <span>03</span> &mdash; Detection Threshold (Rung Analysis)</div>
+  <div class='cards'>
+    <div class='card gold'><div class='card-label'>Graviton rung n*</div><div class='card-val'>61.24</div><div class='card-sub'>At 10^12 Hz gravity anchor</div></div>
+    <div class='card gold'><div class='card-label'>Graviton energy</div><div class='card-val'>4.1634e-09 J</div><div class='card-sub'>2.5989e+10 eV</div></div>
+    <div class='card'><div class='card-label'>Rung gap to LIGO</div><div class='card-val'>5.64</div><div class='card-sub'>Explains non-detection</div></div>
+    <div class='card warn'><div class='card-label'>Gravitons for LIGO</div><div class='card-val'>2.40e-12</div><div class='card-sub'>Coherent bulk required</div></div>
+  </div>
+  <div class='note'>LIGO detects gravitational WAVES (coherent bulk resonance), not individual gravitons -- fully consistent with the rung gap prediction.</div>
+</div>
+<div class='sec'>
+  <div class='sec-label'>Tests <span>04 &amp; 05</span> &mdash; BH Interior &amp; Virtual Graviton Elimination</div>
+  <div class='summary-grid'>
+    <div class='summary-item'>
+      <b>Test 04 -- Black Hole Interior</b>
+      BH floor frequency: 1e-30 Hz<br>
+      Rung n*: -139.7299<br>
+      Period: 10^30.0 sec<br><br>
+      Standard GR: singularity at r=0, density &rarr; &infin;.<br>
+      phi-Framework: interior is a ladder descent toward phi^0.<br>
+      As matter falls inward, frequency redshifts (f &rarr; 0), rung descends (n* &rarr; &minus;&infin;) asymptotically.<br>
+      <span style='color:#3dd6f5;'>No singularity. Just the ladder running out of rungs toward vacuum.</span>
+    </div>
+    <div class='summary-item'>
+      <b>Test 05 -- Virtual Graviton Elimination</b>
+      Standard QFT requires virtual gravitons as off-shell mediators. These violate E&sup2;=(pc)&sup2;+(mc&sup2;)&sup2; and exist only inside Feynman diagrams.<br><br>
+      phi-Framework: gravity is a real resonance at n* = 61.24 (10&sup1;&sup2; Hz).<br>
+      Two masses interact by occupying the SAME rung -- they share the same resonant frequency.<br><br>
+      Like two pendulums on the same beam synchronizing without exchanging particles:<br>
+      <span style='color:#3dd6f5;'>The coupling IS the shared rung. No mediating particle needed.</span>
+    </div>
+  </div>
+</div>
+<div class='sec'>
+  <div class='sec-label'>Step <span>06</span> &mdash; Graviton Summary Verdict</div>
+  <div class='verdict'>
+    <div class='verdict-title'>Five Graviton Problems. One Geometric Answer.</div>
+    <p><span class='gold-t'>1. Energy:</span> Rung-specific, not zero-point. Each force self-anchors at its own frequency; the ladder structure is universal (phi^n), tuning is system-specific.</p>
+    <p><span class='gold-t'>2. Mass:</span> <span class='hi'>Nonzero minimum set by phi^1 floor -- a testable prediction.</span> Compton wavelength = 2.9509e-05 m sets the maximum range of gravity.</p>
+    <p><span class='gold-t'>3. Detection:</span> Rung gap of 5.6 rungs between graviton (n*=61.24) and LIGO threshold explains why individual gravitons are undetectable. LIGO sees coherent bulk -- consistent.</p>
+    <p><span class='gold-t'>4. BH Interior:</span> Singularity is replaced by asymptotic rung descent toward phi^0. No infinite density. No broken physics.</p>
+    <p><span class='gold-t'>5. Virtual gravitons:</span> Eliminated. The coupling is the shared rung. <span class='hi'>This is not renormalization. It is geometry.</span></p>
+  </div>
+</div>
+<footer>QCORE LABS &mdash; LAW OF HARMONIC RESONANCE &mdash; phi-RECURSIVE FRAMEWORK</footer>
+</div>
+</body>
+</html>

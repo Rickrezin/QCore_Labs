@@ -1,0 +1,123 @@
+======================================================================
+TEST 1 - Graviton Energy at Each Anchor
+======================================================================
+
+                 Force    Freq (Hz)    Rung n*    E_jackson (J)         E (eV)             Period
+-----------------------------------------------------------------------------------------------
+         Gravity (THz)     1.00e+12     61.239       4.1634e-09     2.5989e+10          0.000 sec
+      Black Hole floor     1.00e-30   -139.730       4.1634e-93     2.5989e-74        10^30.0 sec
+        Strong Nuclear     1.00e+23    113.874       4.1634e+13     2.5989e+32          0.000 sec
+       Electromagnetic     1.00e+15     75.594       4.1634e-03     2.5989e+16          0.000 sec
+          Weak Nuclear     1.00e+10     51.669       4.1634e-13     2.5989e+06          0.000 sec
+
+======================================================================
+TEST 2 - Graviton Mass Bound
+======================================================================
+
+Standard QFT graviton mass:        exactly 0 (required for infinite range)
+phi-Framework ground state (n=1):  E_min = hbar*omega*phi^1
+
+At gravity anchor (10^12 Hz):
+  E_min  = 1.0721e-21 J
+  E_min  = 6.6926e-03 eV
+  m_min  = 1.1913e-38 kg  (5.4714e-31 x m_Planck)
+
+At black hole floor (10^-30 Hz):
+  E_min  = 1.0721e-63 J
+  E_min  = 6.6926e-45 eV
+  m_min  = 1.1913e-80 kg  (5.4714e-73 x m_Planck)
+
+VERDICT:
+The phi-ladder has a hard floor at n=1. Zero energy is only reached
+asymptotically as n -> -inf, never at a finite rung.
+The graviton cannot have exactly zero mass in this framework --
+it has a minimum mass set by the ladder floor.
+This is not a problem -- it is a prediction.
+A nonzero graviton mass has a Compton wavelength:
+  lambda_c = hbar/mc  ->  at gravity anchor: 2.9509e-05 m
+This sets a maximum range for gravitational interaction,
+replacing the assumed infinite range with a geometric bound.
+
+======================================================================
+TEST 3 - Why Gravitons Are Undetectable (Rung Analysis)
+======================================================================
+
+Graviton energy at n* = 61.24:  4.1634e-09 J  (2.5989e+10 eV)
+LIGO sensitivity floor:              ~1e-20 J
+Gravitons needed to trigger LIGO:    2.4019e-12
+
+Standard explanation: gravitational coupling too weak (G is tiny)
+phi-Framework explanation: graviton sits at rung n* = 61.24
+  -- a single rung transition carries 4.1634e-09 J
+  -- detector sits at rung equivalent 66.88
+  -- rung gap between graviton and detector: 5.64 rungs
+
+Detection requires coherent accumulation of 2.40e-12 gravitons.
+LIGO detects gravitational WAVES (coherent bulk resonance),
+not individual gravitons -- consistent with rung gap prediction.
+Individual graviton detection would require a detector
+at rung n* = 61.24, i.e. resonantly matched to 10^12 Hz.
+
+======================================================================
+TEST 4 - Black Hole Interior: Ladder Asymptote Toward phi^0
+======================================================================
+
+Black hole floor frequency:  1e-30 Hz
+Rung n*:                     -139.7299
+Period:                      10^30.0 sec
+= 2.33e+12 x age of universe
+
+Standard GR: singularity at r=0, density -> inf, curvature -> inf
+phi-Framework: interior is a ladder descent toward phi^0
+
+As matter falls toward the center:
+  -- Resonance frequency redshifts: f -> 0
+  -- Rung number descends: n* -> -inf asymptotically
+  -- Energy per quantum -> 0 asymptotically
+  -- Period -> inf (time dilation expressed as rung descent)
+
+The singularity is replaced by an asymptotic approach
+to the vacuum floor phi^0 = 1.
+
+Matter does not reach r=0. It reaches n* -> -inf,
+which is the geometric expression of infinite time dilation.
+No infinite density. No broken physics.
+Just the ladder running out of rungs toward vacuum.
+
+Black hole evaporation (Hawking) terminates when the
+remaining mass maps to n* = 1 (ground state).
+Interior descent and exterior evaporation are
+mirror processes on the same ladder.
+
+======================================================================
+TEST 5 - Virtual Graviton Elimination
+======================================================================
+
+Standard QFT requires virtual gravitons as off-shell mediators
+of gravitational interaction between masses.
+These are mathematical bookkeeping -- they violate E^2=(pc)^2+(mc^2)^2
+and exist only inside Feynman diagrams, never in measurement.
+
+phi-Framework reframe:
+Gravity is a real resonance at n* = 61.24 (10^12 Hz)
+Two masses interact by being on the SAME rung --
+they share the same resonant frequency.
+No mediating particle needed.
+
+This is the same mechanism as coupled oscillators:
+two pendulums on the same beam synchronize without
+exchanging "virtual synchronization particles."
+
+The coupling IS the shared rung.
+Virtual gravitons are eliminated not by disproof
+but by making the mechanism explicit.
+
+
+GRAVITON SUMMARY
+================
+
+1. Energy:     Rung-specific, not zero-point
+2. Mass:       Nonzero minimum set by phi^1 floor -- PREDICTION
+3. Detection:  Rung gap of 5.6 between graviton and detector explains non-detection
+4. BH interior: Singularity -> asymptotic rung descent to phi^0
+5. Virtual:    Eliminated -- coupling = shared rung geometry

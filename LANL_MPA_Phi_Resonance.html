@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QCore Labs — LANL MPA Phi-Resonance Analysis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+<style>
+  :root {
+    --bg:      #07090f;
+    --panel:   #0c1120;
+    --border:  #1a2a4a;
+    --teal:    #00d4cc;
+    --gold:    #f0a030;
+    --purple:  #a060f0;
+    --green:   #00e890;
+    --text:    #b8cce0;
+    --dim:     #4a6080;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; font-size: 13px; }
+  header { padding: 28px 32px 18px; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: 18px; color: var(--teal); letter-spacing: 2px; text-transform: uppercase; }
+  header p  { color: var(--dim); font-size: 11px; margin-top: 4px; }
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px; background: var(--border); border-bottom: 1px solid var(--border);
+  }
+  .stat { background: var(--panel); padding: 14px 18px; }
+  .stat .label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; }
+  .stat .value { font-size: 20px; color: var(--teal); margin-top: 4px; }
+  .stat .sub   { font-size: 10px; color: var(--gold); margin-top: 2px; }
+  .hit  { color: var(--green) !important; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .card { background: var(--panel); padding: 18px 20px; }
+  .card h2 { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+  .chart-wrap { height: 220px; position: relative; }
+  .result-table { width: 100%; border-collapse: collapse; margin-top: 1px; }
+  .result-table td { padding: 7px 14px; border-bottom: 1px solid var(--border); font-size: 11px; }
+  .result-table td:first-child { color: var(--dim); }
+  .result-table td:last-child { text-align: right; }
+  .hit-row td { color: var(--green); }
+  footer { padding: 14px 32px; border-top: 1px solid var(--border); font-size: 10px; color: var(--dim); }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>QCore Labs &mdash; LANL MPA &phi;-Resonance Analysis</h1>
+  <p>Law of Harmonic Resonance: E&#8345; = &#8463;&omega;&phi;&#8319; &nbsp;|&nbsp; ORCID: 0009-0008-7380-4815 &nbsp;|&nbsp; Dataset: LANL 2002 MPA &nbsp;|&nbsp; Geosynchronous (~6.6 R&#8348;) &nbsp;|&nbsp; Real instrument data</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="label">Valid Points</div>
+    <div class="value">8,671</div>
+    <div class="sub">9 CDF files &bull; 87s cadence</div>
+  </div>
+  <div class="stat">
+    <div class="label">n&#8320;hip median</div>
+    <div class="value hit">0.5860 cm&#8315;&#179;</div>
+    <div class="sub">&phi;&#8315;&#185; = 0.6180 &bull; dev 5.2%</div>
+  </div>
+  <div class="stat">
+    <div class="label">n&#8320;e median</div>
+    <div class="value hit">0.4370 cm&#8315;&#179;</div>
+    <div class="sub">&phi;&#8315;&#178; = 0.3820 &bull; dev 14.4%</div>
+  </div>
+  <div class="stat">
+    <div class="label">Density &phi;-hits</div>
+    <div class="value hit">63.8%</div>
+    <div class="sub">n&#8320;hip within 15% of ladder rung</div>
+  </div>
+  <div class="stat">
+    <div class="label">T&#8320;e &phi;-hits</div>
+    <div class="value">44.6%</div>
+    <div class="sub">electron temp within 15% of rung</div>
+  </div>
+  <div class="stat">
+    <div class="label">&phi; = </div>
+    <div class="value" style="color:var(--gold)">1.61803399</div>
+    <div class="sub">(1+&radic;5)/2 &bull; exact algebraic</div>
+  </div>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <h2>High-Energy Ion Density (130 eV – 45 keV)</h2>
+    <div class="chart-wrap"><canvas id="dhChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Electron Density (30 eV – 45 keV)</h2>
+    <div class="chart-wrap"><canvas id="deChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>High-Energy Ion Temperature</h2>
+    <div class="chart-wrap"><canvas id="thChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Electron Temperature</h2>
+    <div class="chart-wrap"><canvas id="teChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Ion Anisotropy T&#8869;/T&#8741;</h2>
+    <div class="chart-wrap"><canvas id="rhChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Electron Anisotropy T&#8869;/T&#8741;</h2>
+    <div class="chart-wrap"><canvas id="reChart"></canvas></div>
+  </div>
+
+  <div class="card" style="grid-column: span 2">
+    <h2>Summary &mdash; &phi;-Ladder Hits (Real LANL MPA Data)</h2>
+    <table class="result-table">
+      <tr class="hit-row">
+        <td>n&#8320;hip median</td><td>0.5860 cm&#8315;&#179;</td>
+        <td>&phi;^-1.110</td><td>nearest &phi;&#8315;&#185; = 0.6180</td>
+        <td class="hit">dev 5.2% &#10003; WITHIN 15%</td>
+      </tr>
+      <tr class="hit-row">
+        <td>n&#8320;e median</td><td>0.4370 cm&#8315;&#179;</td>
+        <td>&phi;^-1.720</td><td>nearest &phi;&#8315;&#178; = 0.3820</td>
+        <td class="hit">dev 14.4% &#10003; WITHIN 15%</td>
+      </tr>
+      <tr>
+        <td>T&#8320;hip median</td><td>5628.9 eV</td>
+        <td>&phi;^17.95</td><td>nearest &phi;&#185;&#8308; = 842.99</td>
+        <td style="color:var(--gold)">dev 567.7% &mdash; no ladder hit</td>
+      </tr>
+      <tr>
+        <td>T&#8320;e median</td><td>670.2 eV</td>
+        <td>&phi;^13.52</td><td>nearest &phi;&#185;&#8308; = 842.99</td>
+        <td style="color:var(--gold)">dev 20.5% &mdash; near miss</td>
+      </tr>
+      <tr>
+        <td>Aniso tratio&#8320;hip</td><td>1.0190</td>
+        <td>&phi;^0.04</td><td>nearest &phi;&#8304; = 1.0000</td>
+        <td class="hit">dev 1.9% &#10003; WITHIN 15%</td>
+      </tr>
+      <tr>
+        <td>Aniso tratio&#8320;e</td><td>1.0123</td>
+        <td>&phi;^0.02</td><td>nearest &phi;&#8304; = 1.0000</td>
+        <td class="hit">dev 1.2% &#10003; WITHIN 15%</td>
+      </tr>
+      <tr>
+        <td colspan="4" style="color:var(--dim); font-size:10px; padding-top:10px">
+          n&#8320;hip distribution: 63.8% of all points within 15% of a &phi;-ladder rung &nbsp;|&nbsp;
+          n&#8320;e distribution: 62.2% &nbsp;|&nbsp;
+          T&#8320;e distribution: 44.6%
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>QCore Labs &bull; Rick Rezin Jackson &bull; ORCID 0009-0008-7380-4815 &bull; LANL MPA DOI: 10.48322/z6y7-r007 &bull; Inside heliosphere baseline &bull; Next: Voyager interstellar comparison</footer>
+
+<script>
+const PHI = 1.618033988749895;
+const TEAL   = '#00d4cc';
+const GOLD   = '#f0a030';
+const PURPLE = '#a060f0';
+const GREEN  = '#00e890';
+
+const LADDER = [{"n": -6, "val": 0.0557280900008412}, {"n": -5, "val": 0.09016994374947422}, {"n": -4, "val": 0.14589803375031543}, {"n": -3, "val": 0.23606797749978967}, {"n": -2, "val": 0.38196601125010515}, {"n": -1, "val": 0.6180339887498948}, {"n": 0, "val": 1.0}, {"n": 1, "val": 1.618033988749895}, {"n": 2, "val": 2.618033988749895}, {"n": 3, "val": 4.23606797749979}, {"n": 4, "val": 6.854101966249686}, {"n": 5, "val": 11.090169943749476}, {"n": 6, "val": 17.944271909999163}, {"n": 7, "val": 29.03444185374864}, {"n": 8, "val": 46.978713763747805}, {"n": 9, "val": 76.01315561749645}, {"n": 10, "val": 122.99186938124426}, {"n": 11, "val": 199.0050249987407}, {"n": 12, "val": 321.996894379985}, {"n": 13, "val": 521.0019193787257}, {"n": 14, "val": 842.9988137587108}];
+
+function gridCfg() {
+  return { color: 'rgba(26,42,74,0.6)', drawBorder: false };
+}
+
+function tickCfg() {
+  return { color: 'rgba(74,96,128,0.8)', font: { size: 9 } };
+}
+
+function ladderAnnotations(axis='x') {
+  const ann = {};
+  LADDER.forEach((l,i) => {
+    ann['l'+i] = {
+      type: 'line',
+      [`${axis}Min`]: l.val, [`${axis}Max`]: l.val,
+      borderColor: 'rgba(240,160,48,0.25)',
+      borderWidth: 1,
+      borderDash: [3,4],
+      label: {
+        display: false,
+      }
+    };
+  });
+  return ann;
+}
+
+function makeChart(id, labels, datasets, logX=true, annotations={}) {
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 800, easing: 'easeInOutQuart' },
+      scales: {
+        x: {
+          type: logX ? 'logarithmic' : 'linear',
+          grid: gridCfg(),
+          ticks: { ...tickCfg(), maxTicksLimit: 7 },
+        },
+        y: {
+          grid: gridCfg(),
+          ticks: { ...tickCfg() },
+          title: { display: true, text: 'Count', color: 'rgba(74,96,128,0.7)', font: { size: 9 } },
+        },
+      },
+      plugins: {
+        legend: { labels: { color: 'rgba(184,204,224,0.8)', font: { size: 10 } } },
+        tooltip: { backgroundColor: '#0b1120', borderColor: '#162238', borderWidth: 1 },
+        annotation: { annotations },
+      },
+    },
+  });
+}
+
+// Density charts with phi ladder lines
+makeChart('dhChart',
+  [0.14127456998347326, 0.1589136793767642, 0.17875515385405355, 0.20107397396311538, 0.22617945347930885, 0.25441952614704383, 0.28618556765063463, 0.3219178196416416, 0.36211149099362583, 0.40732362084085505, 0.4581807985149667, 0.5153878473692393, 0.579737592838521, 0.6521218501091546, 0.7335437836756578, 0.8251318100737359, 0.9281552364658845, 1.0440418518128136, 1.1743977144245679, 1.3210294101245736, 1.485969089499764, 1.6715026312249421, 1.8802013217734221, 2.1149574905591515, 2.379024594373356, 2.6760623066409663, 3.010187236383273, 3.3860299797946616, 3.808799295104188, 4.284354290113493, 4.819285622849229, 5.421006840679843, 6.09785712375426, 6.859216856671107, 7.715637630072018, 8.678988473835009, 9.76262034849579, 10.98155117456329, 12.352673964027842, 13.894990938530992, 15.629876878811729, 17.58137535515663, 19.776531944275224, 22.245769050612147, 25.023307526698375, 28.147640935726116, 31.66206902909373, 35.615297832320294, 40.062114655846486, 45.064147385613126],
+  [{ label: 'n_hip (cm⁻³)', data: [2, 0, 2, 6, 17, 116, 239, 244, 354, 855, 1066, 850, 939, 1108, 681, 332, 228, 235, 244, 204, 166, 129, 114, 108, 96, 87, 41, 26, 10, 14, 12, 7, 12, 10, 6, 6, 12, 9, 9, 7, 9, 9, 6, 7, 9, 8, 6, 9, 4, 0], backgroundColor: 'rgba(0,212,204,0.5)', borderColor: TEAL, borderWidth: 1 }],
+  true,
+  {
+    ...ladderAnnotations('x'),
+    median: { type:'line', xMin:0.586045503616333, xMax:0.586045503616333, borderColor:'rgba(0,232,144,0.7)', borderWidth:2,
+      label:{ display:true, content:'median φ⁻¹', color:GREEN, font:{size:9}, position:'start' } }
+  }
+);
+
+makeChart('deChart',
+  [0.019986327563011403, 0.023127974886001886, 0.026763457200485223, 0.030970400342129896, 0.0358386321380935, 0.041472100435924066, 0.04799109262708787, 0.0555348040570111, 0.0642643101630454, 0.07436600580227874, 0.08605558520668141, 0.09958264754670317, 0.11523602644260406, 0.1333499572207364, 0.1543112135997597, 0.17856736619130925, 0.20663633915293622, 0.23911746904964654, 0.27670430205594454, 0.3201994027478211, 0.37053149068615526, 0.42877527069665544, 0.4961743802680238, 0.5741679440476135, 0.6644213024335974, 0.76886157038915, 0.8897187857403919, 1.0295735255680665, 1.1914120074114725, 1.3786898518209734, 1.5954058677349487, 1.8461874361672035, 2.13638931534122, 2.472207976986127, 2.8608139151349725, 3.3105047525197824, 3.8308824137339954, 4.4330581482132185, 5.129889780742348, 5.936256255328294, 6.869375334575869, 7.949171238172848, 9.198700070403985, 10.64464212054132, 12.317871547846453, 14.254115615258385, 16.494717547909083, 19.087519305235276, 22.08788311588356, 25.559873587508093],
+  [{ label: 'n_e (cm⁻³)', data: [10, 12, 7, 6, 5, 54, 48, 50, 71, 101, 144, 184, 232, 277, 249, 241, 344, 225, 457, 400, 722, 775, 685, 465, 603, 434, 297, 195, 172, 144, 184, 121, 79, 74, 84, 100, 89, 61, 60, 43, 19, 10, 11, 15, 20, 15, 24, 23, 18, 11], backgroundColor: 'rgba(160,96,240,0.5)', borderColor: PURPLE, borderWidth: 1 }],
+  true,
+  {
+    ...ladderAnnotations('x'),
+    median: { type:'line', xMin:0.4369562566280365, xMax:0.4369562566280365, borderColor:'rgba(0,232,144,0.7)', borderWidth:2,
+      label:{ display:true, content:'median φ⁻²', color:GREEN, font:{size:9}, position:'start' } }
+  }
+);
+
+makeChart('thChart',
+  [710.6557406043723, 753.7580768658116, 799.4746344513684, 847.9639698042479, 899.3942560536836, 953.9438662813651, 1011.8019921638479, 1073.1693001365547, 1138.2586273551058, 1207.2957198677475, 1280.5200155590496, 1358.1854745803062, 1440.5614601467882, 1527.9336727566688, 1620.605141071729, 1718.8972728964654, 1823.1509699006524, 1933.727809951502, 2051.0113011560393, 2175.408211963032, 2307.349981937598, 2447.2942181014005, 2595.726282028127, 2753.1609731986837, 2920.14431445441, 3097.2554457407105, 3285.1086327090684, 3484.355397143793, 3695.686776602335, 3919.8357211061802, 4157.579635194645, 4409.743074158032, 4677.200603801386, 4960.879833657192, 5261.764634166983, 5580.898548989846, 5919.388414272528, 6278.40819743373, 6659.203068776393, 7063.09372004941, 7491.480944936564, 7945.850497358966, 8427.778244440875, 8938.935632010567, 9481.095481592045, 10056.13813899302, 10666.057995813906, 11312.970406496199, 11999.119024900127, 12726.883585856796],
+  [{ label: 'T_hip (eV)', data: [0, 0, 0, 0, 1, 1, 2, 2, 3, 2, 9, 14, 4, 4, 6, 9, 9, 20, 13, 22, 34, 35, 35, 74, 97, 156, 153, 191, 152, 163, 238, 346, 601, 736, 745, 713, 755, 688, 612, 493, 402, 284, 214, 206, 160, 97, 95, 49, 22, 3], backgroundColor: 'rgba(240,160,48,0.5)', borderColor: GOLD, borderWidth: 1 }],
+  true, {}
+);
+
+makeChart('teChart',
+  [51.27082648793401, 56.87030387618055, 63.08132098729196, 69.97066634575212, 77.61242269886628, 86.08876364592729, 95.49083727021178, 105.91974627570866, 117.48763516821987, 130.31889617154752, 144.55150684626642, 160.33851379481092, 177.84967840750522, 197.27330234662992, 218.81825239838392, 242.71620646644902, 269.2241448588544, 298.6271136575325, 331.24128988572744, 367.41738143372015, 407.54439830307064, 452.0538357224506, 501.4243141170925, 556.1867258265361, 616.9299439145358, 684.3071544593009, 759.0428804166727, 841.9407725854858, 933.8922514531951, 1035.8860928495592, 1149.0190604851648, 1274.507699708976, 1413.7014193059485, 1568.097002006349, 1739.3546997416915, 1929.3160867233519, 2140.0238623222126, 2373.743816694341, 2632.989195354232, 2920.547724693585, 3239.5115890573716, 3593.3106817277094, 3985.7494873711926, 4421.047992555277, 4903.887064254111, 5439.458784309527, 6033.522281105472, 6692.4656588269645, 7423.374690243445, 8234.109011686114],
+  [{ label: 'T_e (eV)', data: [4, 12, 3, 4, 5, 3, 6, 3, 13, 23, 51, 44, 74, 178, 200, 229, 264, 423, 428, 399, 381, 505, 317, 336, 340, 278, 356, 315, 460, 318, 409, 406, 284, 293, 172, 160, 188, 187, 185, 130, 97, 60, 45, 37, 17, 12, 6, 4, 5, 0], backgroundColor: 'rgba(160,96,240,0.5)', borderColor: PURPLE, borderWidth: 1 }],
+  true, ladderAnnotations('x')
+);
+
+makeChart('rhChart',
+  [0.8937133246660233, 0.8987235110998154, 0.9037336975336074, 0.9087438839673996, 0.9137540704011917, 0.9187642568349839, 0.923774443268776, 0.928784629702568, 0.9337948161363602, 0.9388050025701523, 0.9438151890039443, 0.9488253754377365, 0.9538355618715286, 0.9588457483053208, 0.9638559347391129, 0.9688661211729049, 0.9738763076066971, 0.9788864940404892, 0.9838966804742812, 0.9889068669080734, 0.9939170533418655, 0.9989272397756577, 1.0039374262094496, 1.008947612643242, 1.0139577990770339, 1.0189679855108262, 1.0239781719446182, 1.0289883583784105, 1.0339985448122024, 1.0390087312459946, 1.0440189176797867, 1.0490291041135786, 1.054039290547371, 1.059049476981163, 1.0640596634149553, 1.0690698498487472, 1.0740800362825393, 1.0790902227163315, 1.0841004091501234, 1.0891105955839158, 1.0941207820177077, 1.0991309684515, 1.104141154885292, 1.1091513413190843, 1.1141615277528762, 1.1191717141866684, 1.1241819006204605, 1.1291920870542524, 1.1342022734880448, 1.1392124599218367],
+  [{ label: 'tratio_hip', data: [1, 2, 4, 3, 1, 3, 8, 5, 13, 7, 18, 20, 42, 69, 121, 166, 220, 268, 313, 238, 127, 36, 372, 756, 982, 1043, 1007, 837, 674, 469, 330, 208, 125, 70, 44, 28, 11, 11, 8, 0, 4, 5, 0, 1, 0, 0, 0, 0, 0, 1], backgroundColor: 'rgba(0,212,204,0.4)', borderColor: TEAL, borderWidth: 1 }],
+  false,
+  {
+    phi0: { type:'line', xMin:1.0, xMax:1.0, borderColor:'rgba(240,160,48,0.6)', borderWidth:1.5, borderDash:[4,3],
+      label:{ display:true, content:'φ⁰=1', color:GOLD, font:{size:9}, position:'start' } },
+    phi1: { type:'line', xMin:PHI, xMax:PHI, borderColor:'rgba(0,212,204,0.4)', borderWidth:1, borderDash:[4,3] },
+  }
+);
+
+makeChart('reChart',
+  [0.8753282535076141, 0.88089737534523, 0.8864664971828461, 0.892035619020462, 0.8976047408580781, 0.903173862695694, 0.9087429845333099, 0.9143121063709259, 0.9198812282085419, 0.9254503500461578, 0.9310194718837739, 0.9365885937213898, 0.9421577155590057, 0.9477268373966217, 0.9532959592342376, 0.9588650810718536, 0.9644342029094697, 0.9700033247470856, 0.9755724465847015, 0.9811415684223175, 0.9867106902599334, 0.9922798120975495, 0.9978489339351655, 1.0034180557727814, 1.0089871776103974, 1.0145562994480133, 1.0201254212856292, 1.0256945431232452, 1.031263664960861, 1.0368327867984772, 1.0424019086360932, 1.047971030473709, 1.053540152311325, 1.0591092741489412, 1.0646783959865571, 1.070247517824173, 1.075816639661789, 1.081385761499405, 1.0869548833370208, 1.0925240051746368, 1.0980931270122527, 1.1036622488498689, 1.1092313706874848, 1.1148004925251007, 1.1203696143627166, 1.1259387362003326, 1.1315078580379487, 1.1370769798755647, 1.1426461017131806, 1.1482152235507965],
+  [{ label: 'tratio_e', data: [1, 1, 2, 2, 1, 1, 1, 2, 6, 7, 4, 13, 20, 14, 22, 27, 35, 54, 75, 119, 194, 152, 72, 1156, 2151, 1678, 1012, 642, 427, 284, 174, 121, 86, 43, 23, 16, 8, 10, 5, 3, 2, 1, 0, 2, 0, 0, 0, 0, 1, 1], backgroundColor: 'rgba(0,232,144,0.4)', borderColor: GREEN, borderWidth: 1 }],
+  false,
+  {
+    phi0: { type:'line', xMin:1.0, xMax:1.0, borderColor:'rgba(240,160,48,0.6)', borderWidth:1.5, borderDash:[4,3],
+      label:{ display:true, content:'φ⁰=1', color:GOLD, font:{size:9}, position:'start' } },
+    phi1: { type:'line', xMin:PHI, xMax:PHI, borderColor:'rgba(0,212,204,0.4)', borderWidth:1, borderDash:[4,3] },
+  }
+);
+</script>
+</body>
+</html>

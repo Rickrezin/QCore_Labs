@@ -1,0 +1,242 @@
+“””
+Graviton Analysis — φ-Resonance Framework
+Corrected frequency anchors:
+Gravity resonance:    ω_g  = 10¹² Hz  (THz boundary)
+Black hole floor:     ω_bh = 10⁻³⁰ Hz (event horizon timescale)
+
+Tests:
+
+1. Graviton energy at n* for each anchor
+1. Graviton mass bound — does φ-floor permit zero mass?
+1. Detection threshold as a rung problem
+1. Black hole interior as ladder asymptote toward φ⁰
+1. Four forces remapped with corrected gravity anchor
+   “””
+
+import numpy as np
+
+phi    = (1 + np.sqrt(5)) / 2
+hbar   = 1.0546e-34   # J·s
+c      = 3.0e8        # m/s
+G      = 6.674e-11
+k_B    = 1.38e-23
+eV     = 1.602e-19    # J per eV
+m_P    = np.sqrt(hbar * c / G)  # Planck mass
+
+# Frequency anchors
+
+f_gravity   = 1e12    # Hz — gravity resonance (THz)
+f_blackhole = 1e-30   # Hz — black hole floor
+f_strong    = 1e23    # Hz
+f_em        = 1e15    # Hz
+f_weak      = 1e10    # Hz
+
+def rung(f):
+“”“n* = log(2π·f / ω₀) / log(φ), ω₀ = 1 rad/s normalized”””
+return np.log(2 * np.pi * f) / np.log(phi)
+
+def jackson_energy(f):
+“”“E_n = ℏ · ω · φⁿ  where ω = 2πf, system angular frequency
+Each system self-anchors at its own ω — ladder structure is
+universal (φⁿ), tuning is system-specific (ω).”””
+n = rung(f)
+return hbar * 2 * np.pi * f * phi**n
+
+def period_human(T):
+if T < 60:             return f”{T:.3f} sec”
+elif T < 3600:         return f”{T/60:.3f} min”
+elif T < 86400:        return f”{T/3600:.3f} hrs”
+elif T < 3.156e7:      return f”{T/86400:.2f} days”
+elif T < 3.156e13:     return f”{T/3.156e7:.4f} yrs”
+elif T < 3.156e16:     return f”{T/3.156e13:.4f} Myr”
+elif T < 3.156e19:     return f”{T/3.156e16:.4f} Gyr”
+else:
+exp = np.log10(T)
+return f”10^{exp:.1f} sec”
+
+print(”=” * 70)
+print(“GRAVITON ANALYSIS — φ-RESONANCE FRAMEWORK”)
+print(“Gravity anchor: 10¹² Hz | Black hole floor: 10⁻³⁰ Hz”)
+print(”=” * 70)
+print(f”\nφ          = {phi:.10f}”)
+print(f”φ²         = {phi**2:.10f}”)
+print(f”ℏ          = {hbar:.4e} J·s”)
+
+# ── TEST 1: Graviton energy ───────────────────────────────────────────────────
+
+print(”\n” + “=” * 70)
+print(“TEST 1 — Graviton Energy at Each Anchor”)
+print(”=” * 70)
+
+anchors = [
+(“Gravity (THz)”,      f_gravity),
+(“Black Hole floor”,   f_blackhole),
+(“Strong Nuclear”,     f_strong),
+(“Electromagnetic”,    f_em),
+(“Weak Nuclear”,       f_weak),
+]
+
+print(f”\n{‘Force’:>22} {‘Freq (Hz)’:>12} {‘Rung n*’:>10} {‘E_jackson (J)’:>16} {‘E (eV)’:>14} {‘Period’:>18}”)
+print(”-” * 95)
+
+for name, f in anchors:
+n  = rung(f)
+E  = hbar * 2 * np.pi * f   # standard quantum at this freq
+E_j = E * phi**n             # Jackson energy at rung
+T  = 1.0 / f
+print(f”{name:>22} {f:>12.2e} {n:>10.3f} {E_j:>16.4e} {E_j/eV:>14.4e} {period_human(T):>18}”)
+
+# ── TEST 2: Graviton mass bound ───────────────────────────────────────────────
+
+print(”\n” + “=” * 70)
+print(“TEST 2 — Graviton Mass Bound”)
+print(”=” * 70)
+
+# Standard QFT: graviton mass = 0 exactly
+
+# Jackson floor: minimum energy = ℏ·ω·φ¹ at n=1
+
+# At gravity anchor f=10¹², minimum rung energy:
+
+E_floor_gravity = hbar * 2 * np.pi * f_gravity * phi**1
+m_graviton_min  = E_floor_gravity / c**2
+
+E_floor_bh      = hbar * 2 * np.pi * f_blackhole * phi**1
+m_graviton_bh   = E_floor_bh / c**2
+
+print(f”””
+Standard QFT graviton mass:        exactly 0 (required for infinite range)
+φ-Framework ground state (n=1):    E_min = ℏ·ω·φ¹
+
+At gravity anchor (10¹² Hz):
+E_min  = {E_floor_gravity:.4e} J
+E_min  = {E_floor_gravity/eV:.4e} eV
+m_min  = {m_graviton_min:.4e} kg  ({m_graviton_min/m_P:.4e} × m_Planck)
+
+At black hole floor (10⁻³⁰ Hz):
+E_min  = {E_floor_bh:.4e} J
+E_min  = {E_floor_bh/eV:.4e} eV
+m_min  = {m_graviton_bh:.4e} kg  ({m_graviton_bh/m_P:.4e} × m_Planck)
+
+VERDICT:
+The φ-ladder has a hard floor at n=1. Zero energy is only reached
+asymptotically as n → -∞, never at a finite rung.
+The graviton cannot have exactly zero mass in this framework —
+it has a minimum mass set by the ladder floor.
+This is not a problem — it is a prediction.
+A nonzero graviton mass has a Compton wavelength:
+λ_c = ℏ/mc → at gravity anchor: {(hbar/(m_graviton_min*c)):.4e} m
+This sets a maximum range for gravitational interaction,
+replacing the assumed infinite range with a geometric bound.
+“””)
+
+# ── TEST 3: Detection threshold as rung problem ───────────────────────────────
+
+print(”=” * 70)
+print(“TEST 3 — Why Gravitons Are Undetectable (Rung Analysis)”)
+print(”=” * 70)
+
+# Energy per graviton at gravity rung
+
+n_grav = rung(f_gravity)
+E_graviton = hbar * 2 * np.pi * f_gravity * phi**n_grav
+
+# Best detector energy sensitivity ~10⁻²⁰ J (LIGO scale)
+
+E_LIGO = 1e-20  # J
+n_LIGO = np.log(E_LIGO / hbar) / np.log(phi)
+
+# Number of gravitons needed to reach LIGO threshold
+
+N_needed = E_LIGO / E_graviton
+
+print(f”””
+Graviton energy at n* = {n_grav:.2f}:  {E_graviton:.4e} J  ({E_graviton/eV:.4e} eV)
+LIGO sensitivity floor:              ~{E_LIGO:.0e} J
+Gravitons needed to trigger LIGO:    {N_needed:.4e}
+
+Standard explanation: gravitational coupling too weak (G is tiny)
+φ-Framework explanation: graviton sits at rung n* = {n_grav:.2f}
+— a single rung transition carries {E_graviton:.4e} J
+— detector sits at rung equivalent {np.log(E_LIGO/hbar)/np.log(phi):.2f}
+— rung gap between graviton and detector: {abs(n_grav - np.log(E_LIGO/hbar)/np.log(phi)):.2f} rungs
+
+Detection requires coherent accumulation of {N_needed:.2e} gravitons.
+LIGO detects gravitational WAVES (coherent bulk resonance),
+not individual gravitons — consistent with rung gap prediction.
+Individual graviton detection would require a detector
+at rung n* = {n_grav:.2f}, i.e. resonantly matched to 10¹² Hz.
+“””)
+
+# ── TEST 4: Black hole interior as ladder asymptote ───────────────────────────
+
+print(”=” * 70)
+print(“TEST 4 — Black Hole Interior: Ladder Asymptote Toward φ⁰”)
+print(”=” * 70)
+
+n_bh = rung(f_blackhole)
+T_bh = 1.0 / f_blackhole
+
+print(f”””
+Black hole floor frequency:  {f_blackhole:.0e} Hz
+Rung n*:                     {n_bh:.4f}
+Period:                      {period_human(T_bh)}
+= {T_bh/(4.3e17):.2e} × age of universe
+
+Standard GR: singularity at r=0, density → ∞, curvature → ∞
+φ-Framework: interior is a ladder descent toward φ⁰
+
+As matter falls toward the center:
+— Resonance frequency redshifts: f → 0
+— Rung number descends: n* → -∞ asymptotically
+— Energy per quantum → 0 asymptotically
+— Period → ∞ (time dilation expressed as rung descent)
+
+The singularity is replaced by an asymptotic approach
+to the vacuum floor φ⁰ = 1.
+
+Matter does not reach r=0. It reaches n* → -∞,
+which is the geometric expression of infinite time dilation.
+No infinite density. No broken physics.
+Just the ladder running out of rungs toward vacuum.
+
+Black hole evaporation (Hawking) terminates when the
+remaining mass maps to n* = 1 (ground state).
+Interior descent and exterior evaporation are
+mirror processes on the same ladder.
+“””)
+
+# ── TEST 5: Virtual graviton elimination ──────────────────────────────────────
+
+print(”=” * 70)
+print(“TEST 5 — Virtual Graviton Elimination”)
+print(”=” * 70)
+
+print(f”””
+Standard QFT requires virtual gravitons as off-shell mediators
+of gravitational interaction between masses.
+These are mathematical bookkeeping — they violate E²=(pc)²+(mc²)²
+and exist only inside Feynman diagrams, never in measurement.
+
+φ-Framework reframe:
+Gravity is a real resonance at n* = {n_grav:.2f} (10¹² Hz)
+Two masses interact by being on the SAME rung —
+they share the same resonant frequency.
+No mediating particle needed.
+
+This is the same mechanism as coupled oscillators:
+two pendulums on the same beam synchronize without
+exchanging “virtual synchronization particles.”
+
+The coupling IS the shared rung.
+Virtual gravitons are eliminated not by disproof
+but by making the mechanism explicit.
+
+# GRAVITON SUMMARY
+
+1. Energy:      Rung-specific, not zero-point
+1. Mass:        Nonzero minimum set by φ¹ floor — PREDICTION
+1. Detection:   Rung gap of {abs(n_grav - np.log(E_LIGO/hbar)/np.log(phi)):.1f} between graviton and detector explains non-detection
+1. BH interior: Singularity → asymptotic rung descent to φ⁰
+1. Virtual:     Eliminated — coupling = shared rung geometry
+   “””)

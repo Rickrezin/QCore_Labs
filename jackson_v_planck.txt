@@ -1,0 +1,118 @@
+======================================================================
+PLANCK vs JACKSON LADDER DIVERGENCE
+QCore Labs -- phi-Resonance Framework
+======================================================================
+
+phi  = 1.6180339887498949
+phi^2 = 2.6180339887498949
+
+======================================================================
+STEP 01 -- Core Ladder Comparison  (n = 1 to 12)
+======================================================================
+
+   n         E_P = n       E_J = phi^n             Delta     R = E_J/E_P
+----------------------------------------------------------------------
+   1     1.0000000000      1.6180339887     +0.6180339887    1.6180339887
+   2     2.0000000000      2.6180339887     +0.6180339887    1.3090169944
+   3     3.0000000000      4.2360679775     +1.2360679775    1.4120226592
+   4     4.0000000000      6.8541019662     +2.8541019662    1.7135254916
+   5 *   5.0000000000     11.0901699437     +6.0901699437    2.2180339887
+   6     6.0000000000     17.9442719100    +11.9442719100    2.9907119850
+   7     7.0000000000     29.0344418537    +22.0344418537    4.1477774077
+   8     8.0000000000     46.9787137637    +38.9787137637    5.8723392205
+   9     9.0000000000     76.0131556175    +67.0131556175    8.4459061797
+  10    10.0000000000    122.9918693812   +112.9918693812   12.2991869381
+  11    11.0000000000    199.0050249987   +188.0050249987   18.0913659090
+  12    12.0000000000    321.9968943800   +309.9968943800   26.8330745317
+
+  * = Planck-5c highlighted
+
+======================================================================
+STEP 02 -- Second Finite Differences of Delta_n
+======================================================================
+
+   n     Delta^2 Delta_n    Sign   Monotone?
+--------------------------------------------
+   2        0.6180339887       +         YES
+   3        1.0000000000       +         YES
+   4        1.6180339887       +         YES
+   5        2.6180339887       +         YES
+   6        4.2360679775       +         YES
+   7        6.8541019662       +         YES
+   8       11.0901699437       +         YES
+   9       17.9442719100       +         YES
+  10       29.0344418537       +         YES
+  11       46.9787137637       +         YES
+
+-> Monotone from n = 2. Ladders never tangent after n = 1.
+
+======================================================================
+STEP 03 -- Exponential Fit and Curvature Mismatch
+======================================================================
+
+Jackson fit  E_n = a * phi^n:
+  a = 1.00000000
+  b = 1.61803399  (= phi, exact)
+  b_J / phi = 1.000000000000  (check)
+
+Planck forced fit  E_n = a * b_P^n:
+  a   = 2.26553787
+  b_P = 1.15619653
+  |phi - b_P|   = 0.46183746
+  phi / b_P     = 1.399445
+
+Planck effective base is 28.5% below phi -- structural incommensurability.
+
+======================================================================
+STEP 04 -- Planck-5c Projection onto Jackson Manifold
+======================================================================
+
+Planck-5c point:          (n=5, E=5.0000)
+Closest Jackson point:    (t* = 3.55798409, E = 5.540828)
+Orthogonal distance d_perp = 1.5401
+  As % of E_5^J = 11.090170:  13.89%
+Delta_n from nearest rung: -1.4420
+Nearest integer rung:      n = 4
+
+======================================================================
+STEP 05 -- Wormhole / Exotic Matter Off-Manifold
+======================================================================
+
+Morris-Thorne throat radius:  r0 = 5.0000 Planck lengths
+Jackson rung for r0 = 5:      n* = 3.3446  (non-integer -- no exact rung)
+Off-manifold delta in E:       |r0 - phi^3| = |5.0 - 4.2361| = 0.7639
+
+Exotic matter density (Planck units): rho = -0.001592
+Jackson ground state floor:           phi^1 = 1.618034
+Exotic rho rung:  NEGATIVE -- no valid Jackson rung exists
+  -> Exotic matter is entirely off-ladder (below n=1 floor)
+  Magnitude rung (for reference): n* = -13.3892  (BELOW n=1 floor -- inadmissible)
+
+======================================================================
+STEP 06 -- Analytic Verdict
+======================================================================
+
+PLANCK CONSTRUCTIONS ARE OFF-MANIFOLD
+--------------------------------------
+The second finite difference of Delta_n is strictly positive and
+monotone from n = 2. The linear Planck axis is never tangent
+to the phi-recursive Jackson manifold after the first rung.
+
+Curvature mismatch: fitted Planck base b_P = 1.1562 vs phi = 1.6180.
+Gap = 0.4618, ratio phi/b_P = 1.3994. Structural, not perturbative.
+
+Planck-5c projects at t* = 3.558 with orthogonal displacement
+d_perp = 1.5401 (13.9% of E_5^J).
+Nearest integer rung is n = 4, not n = 5.
+
+Morris-Thorne wormhole throat r0 = 5 Planck lengths lands at
+Jackson n* = 3.345 (non-integer, delta = 0.764).
+Required exotic matter density maps to n* = -13.39 -- below
+the Jackson ground state. No valid eigenstate exists there.
+
+Conclusion: particles and states derived using the Planck ladder
+as scaling base have no corresponding Jackson rung. They are
+solutions to a misspecified eigenvalue equation -- artifacts of a
+linear grid imposed on a phi-recursive vacuum.
+
+Chart saved -> Planck_Jackson_divergence.png
