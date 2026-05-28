@@ -55,36 +55,36 @@ where φ⁰ = 1 is the exact algebraic vacuum, φ¹ is the ground state, and the
 
 | File | Description |
 |---|---|
-| `Law_of_Harmonic_Resonance_Monograph_V8.pdf` | Master monograph — unified framework spanning 5 physical scales, D6/TQP taxonomy, φ-periodic table, Higgs classification, solar resonance |
-| `The φ-Resonance Framework.html` | Unified HTML paper covering vacuum structure, graviton analysis, Hawking radiation, UV divergence, and Planck/Jackson ladder comparison |
-| `single cycle hypothesis.pdf` | Single Cycle Theorem — particles as single closed waveform cycles; sawtooth waveform hypothesis for confined hadronic loops |
-| `Baryon_Frequency_Grammar.pdf` | φ-resonance grammar for baryon classification |
-| `The core identity equation.pdf` | The Identity Equation — core φ-algebraic structure |
-| `The Law of Harmonic Resonance quantization mechanism (1).pdf` | Quantization mechanism derivation |
+| `papers/Law_of_Harmonic_Resonance_Monograph_V8.pdf` | Master monograph — unified framework spanning 5 physical scales, D6/TQP taxonomy, φ-periodic table, Higgs classification, solar resonance |
+| `html/The φ-Resonance Framework.html` | Unified HTML paper covering vacuum structure, graviton analysis, Hawking radiation, UV divergence, and Planck/Jackson ladder comparison |
+| `papers/single cycle hypothesis.pdf` | Single Cycle Theorem — particles as single closed waveform cycles; sawtooth waveform hypothesis for confined hadronic loops |
+| `papers/Baryon_Frequency_Grammar.pdf` | φ-resonance grammar for baryon classification |
+| `papers/The core identity equation.pdf` | The Identity Equation — core φ-algebraic structure |
+| `papers/The Law of Harmonic Resonance quantization mechanism (1).pdf` | Quantization mechanism derivation |
 
 ### Analysis Scripts (Python)
 
 | File | Description |
 |---|---|
-| `Graviton_analysis.py` | Graviton energy at interaction anchors, mass bound, LIGO rung gap, black hole interior ladder descent, virtual graviton elimination |
-| `Hawking_radiation.py` | Hawking temperature φ²-scaling, evaporation endpoint, information paradox resolution via stable remnant at n=1 |
-| `Uv_divergence.py` | UV loop integral convergence under φ-weighted density, propagator self-regulation, hierarchy problem reduction from 10³⁴ to ~81 rungs |
-| `Negative_energy.py` | Casimir, exotic matter, and Dirac sea mapped to φ-ladder — unified verdict: negative energy is a coordinate error below φ⁰ |
-| `Planck_jackson.py` | Structural divergence between linear Planck ladder and φ-recursive Jackson ladder; curvature mismatch; Planck-5c off-manifold projection |
-| `lanl_mpa_phi_analysis.py` | LANL MPA geosynchronous plasma data (2002) — φ-ladder hit analysis across 8,671 valid data points |
-| `de1_rims_phi_analysis.py` | DE-1 RIMS ion mass spectrometer φ-resonance analysis |
-| `phicmb.py` | CMB extrema extraction pipeline from WMAP ILC FITS data — φ-ladder comparison for cosmic microwave background structure |
-| `fitsreader.py` | FITS file reader for WMAP/CMB data pipeline |
-| `fitstocsv.py` | FITS-to-CSV converter for CMB data processing |
-| `directory.py` | Repository index script |
+| `scripts/Graviton_analysis.py` | Graviton energy at interaction anchors, mass bound, LIGO rung gap, black hole interior ladder descent, virtual graviton elimination |
+| `scripts/Hawking_radiation.py` | Hawking temperature φ²-scaling, evaporation endpoint, information paradox resolution via stable remnant at n=1 |
+| `scripts/Uv_divergence.py` | UV loop integral convergence under φ-weighted density, propagator self-regulation, hierarchy problem reduction from 10³⁴ to ~81 rungs |
+| `scripts/Negative_energy.py` | Casimir, exotic matter, and Dirac sea mapped to φ-ladder — unified verdict: negative energy is a coordinate error below φ⁰ |
+| `scripts/Planck_jackson.py` | Structural divergence between linear Planck ladder and φ-recursive Jackson ladder; curvature mismatch; Planck-5c off-manifold projection |
+| `scripts/lanl_mpa_phi_analysis.py` | LANL MPA geosynchronous plasma data (2002) — φ-ladder hit analysis across 8,671 valid data points |
+| `scripts/de1_rims_phi_analysis.py` | DE-1 RIMS ion mass spectrometer φ-resonance analysis |
+| `scripts/phicmb.py` | CMB extrema extraction pipeline from WMAP ILC FITS data — φ-ladder comparison for cosmic microwave background structure |
+| `scripts/fitsreader.py` | FITS file reader for WMAP/CMB data pipeline |
+| `scripts/fitstocsv.py` | FITS-to-CSV converter for CMB data processing |
+| `scripts/directory.py` | Repository index script |
 
 ### Interactive HTML Artifacts
 
 | File | Description |
 |---|---|
-| `LANL_MPA_Phi_Resonance.html` | Interactive dashboard — LANL MPA plasma density and temperature distributions with φ-ladder overlays; 8,671 data points; 63.8% ion density hit rate |
-| `Planck_Jackson.html` | Interactive comparison — Planck linear ladder vs Jackson φ-recursive ladder; divergence onset, curvature mismatch, off-manifold projection |
-| `Graviton_analysis.html` | Interactive graviton rung analysis dashboard |
+| `html/LANL_MPA_Phi_Resonance.html` | Interactive dashboard — LANL MPA plasma density and temperature distributions with φ-ladder overlays; 8,671 data points; 63.8% ion density hit rate |
+| `html/Planck_Jackson.html` | Interactive comparison — Planck linear ladder vs Jackson φ-recursive ladder; divergence onset, curvature mismatch, off-manifold projection |
+| `html/Graviton_analysis.html` | Interactive graviton rung analysis dashboard |
 
 ### Data
 
@@ -97,11 +97,11 @@ where φ⁰ = 1 is the exact algebraic vacuum, φ¹ is the ground state, and the
 
 | File | Description |
 |---|---|
-| `phi ladder solar reorganization.pdf` | Solar system orbital geometry — planets as three-body problems; φ-ladder rung analysis; ~21-hour solar base frequency |
-| `phi m3 gradient invertibility.pdf` | φ-M³ gradient invertibility analysis |
-| `section_7_2_electroweak_forbidden_band.pdf` | Electroweak forbidden band in φ-resonance geometry |
-| `section_7_3_saturation_harmonic_series.pdf` | Saturation and harmonic series structure |
-| `einstein_desert_conformal_paper.docx` | Einstein-Desert conformal geometry paper |
+| `papers/phi ladder solar reorganization.pdf` | Solar system orbital geometry — planets as three-body problems; φ-ladder rung analysis; ~21-hour solar base frequency |
+| `papers/phi m3 gradient invertibility.pdf` | φ-M³ gradient invertibility analysis |
+| `papers/section_7_2_electroweak_forbidden_band.pdf` | Electroweak forbidden band in φ-resonance geometry |
+| `papers/section_7_3_saturation_harmonic_series.pdf` | Saturation and harmonic series structure |
+| `papers/einstein_desert_conformal_paper.docx` | Einstein-Desert conformal geometry paper |
 
 ### Figures
 
@@ -114,14 +114,14 @@ where φ⁰ = 1 is the exact algebraic vacuum, φ¹ is the ground state, and the
 
 | File | Description |
 |---|---|
-| `Graviton analysis result .txt` | Full graviton analysis output — 5 tests, rung mapping, mass prediction |
-| `Hawking radiation results.txt` | Full Hawking radiation output — φ²-scaling, evaporation endpoint, information paradox verdict |
-| `UV divergense results.txt` | Full UV divergence output — loop integral convergence, propagator suppression, hierarchy collapse |
-| `jackson_v_planck.txt` | Full Planck/Jackson ladder divergence output — 6 steps, curvature analysis, off-manifold verdict |
-| `Negative energy .txt` | Full negative energy analysis — Casimir, exotic matter, Dirac sea unified verdict |
-| `From strings to unification.txt` | Narrative overview — quarks to galaxies through φ-resonance |
-| `Zero point .txt` | Zero point energy φ-framework analysis |
-| `Uv divergence.txt` / `Hawking radiation.txt` / `Graviton analysis .txt` | Source analysis texts |
+| `papers/Graviton analysis result .txt` | Full graviton analysis output — 5 tests, rung mapping, mass prediction |
+| `papers/Hawking radiation results.txt` | Full Hawking radiation output — φ²-scaling, evaporation endpoint, information paradox verdict |
+| `papers/UV divergense results.txt` | Full UV divergence output — loop integral convergence, propagator suppression, hierarchy collapse |
+| `papers/jackson_v_planck.txt` | Full Planck/Jackson ladder divergence output — 6 steps, curvature analysis, off-manifold verdict |
+| `papers/Negative energy .txt` | Full negative energy analysis — Casimir, exotic matter, Dirac sea unified verdict |
+| `papers/From strings to unification.txt` | Narrative overview — quarks to galaxies through φ-resonance |
+| `papers/Zero point .txt` | Zero point energy φ-framework analysis |
+| `papers/Uv divergence.txt` / `papers/Hawking radiation.txt` / `papers/Graviton analysis .txt` | Source analysis texts |
 
 ---
 
