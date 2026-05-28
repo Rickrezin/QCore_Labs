@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reverb Sphere — Modal Genesis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap');
+
+  :root {
+    --bg: #050508;
+    --panel: #0a0a10;
+    --border: #1a1a2e;
+    --gold: #c8a84b;
+    --gold2: #e8c870;
+    --cyan: #00e5ff;
+    --red: #ff3366;
+    --green: #00ff9f;
+    --dim: #4a4a6a;
+    --text: #c8c8e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 16px 24px 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(200,168,75,0.4);
+  }
+
+  header span {
+    font-size: 0.7rem;
+    color: var(--dim);
+    letter-spacing: 2px;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 1fr auto;
+    flex: 1;
+    gap: 0;
+  }
+
+  /* LEFT PANEL */
+  .controls {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  .ctrl-section {
+    border: 1px solid var(--border);
+    padding: 12px;
+  }
+
+  .ctrl-section h3 {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .ctrl-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .ctrl-row label {
+    font-size: 0.65rem;
+    color: var(--dim);
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ctrl-row label span {
+    color: var(--cyan);
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(200,168,75,0.6);
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn:hover { background: rgba(200,168,75,0.1); box-shadow: 0 0 12px rgba(200,168,75,0.3); }
+  .btn.active { background: var(--gold); color: var(--bg); }
+
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .btn { flex: 1; }
+
+  /* MODE READOUT */
+  .mode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mode-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    border-left: 2px solid transparent;
+    font-size: 0.65rem;
+    transition: all 0.3s;
+  }
+
+  .mode-item.source { border-color: var(--gold); }
+  .mode-item.new { border-color: var(--cyan); }
+  .mode-item.null { border-color: var(--red); opacity: 0.5; }
+
+  .mode-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* CANVAS AREA */
+  .viz-area {
+    display: grid;
+    grid-template-rows: 1fr 180px;
+    gap: 0;
+  }
+
+  .sphere-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0a0a18 0%, #050508 70%);
+  }
+
+  canvas#sphereCanvas {
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  .sphere-overlay {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 0.6rem;
+    color: var(--dim);
+    text-align: right;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+
+  .sphere-overlay .val { color: var(--cyan); }
+
+  /* WAVEFORM */
+  .waveform-panel {
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave-labels {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .wave-label {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .wave-label-dot {
+    width: 8px; height: 2px;
+  }
+
+  canvas#waveCanvas { display: block; }
+
+  /* BOTTOM INFO */
+  .info-bar {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    padding: 8px 20px;
+    display: flex;
+    gap: 32px;
+    font-size: 0.6rem;
+    color: var(--dim);
+    letter-spacing: 1px;
+    background: var(--panel);
+  }
+
+  .info-bar span { color: var(--text); }
+
+  .phi-badge {
+    margin-left: auto;
+    color: var(--gold);
+    font-size: 0.65rem;
+  }
+
+  /* Legend */
+  .sphere-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    color: var(--dim);
+    line-height: 1.3;
+  }
+
+  .legend-swatch {
+    flex-shrink: 0;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  .legend-swatch.dashed {
+    background: none;
+    border-top: 2px dashed rgba(200,168,75,0.8);
+    height: 0;
+  }
+
+  .legend-swatch.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid;
+    flex-shrink: 0;
+  }
+
+  .legend-swatch.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  .legend-title {
+    font-size: 0.5rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  /* Null indicator */
+  .null-flash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 6px;
+    color: var(--red);
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: 0 0 20px var(--red);
+    transition: opacity 0.1s;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>REVERB SPHERE</h1>
+  <span>MODAL GENESIS SIMULATOR — SINGLE CYCLE THEOREM</span>
+</header>
+
+<div class="main">
+
+  <!-- CONTROLS -->
+  <div class="controls">
+
+    <div class="ctrl-section">
+      <h3>Source Signal</h3>
+      <div class="ctrl-row">
+        <label>FREQUENCY <span id="freqVal">220 Hz</span></label>
+        <input type="range" id="freq" min="8" max="880" value="220" step="0.1">
+      </div>
+      <div class="ctrl-row">
+        <label>AMPLITUDE <span id="ampVal">0.80</span></label>
+        <input type="range" id="amp" min="0.1" max="1.0" value="0.8" step="0.01">
+      </div>
+      <div class="ctrl-row">
+        <label>WAVEFORM</label>
+        <div class="btn-row">
+          <button class="btn active" id="btnSine" onclick="setWave('sine')">SINE</button>
+          <button class="btn" id="btnSaw" onclick="setWave('saw')">SAW</button>
+          <button class="btn" id="btnSq" onclick="setWave('sq')">SQ</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctrl-section">
+      <h3>Sphere Parameters</h3>
+      <div class="ctrl-row">
+        <label>RADIUS (φ-scaled) <span id="radVal">1.618</span></label>
+        <input type="range" id="rad" min="0.5" max="3.0" value="1.618" step="0.001">
+      </div>
+      <div class="ctrl-row">
+        <label>REFLECTION COEFF <span id="refVal">0.85</span></label>
+        <input type="range" id="ref" min="0.3" max="0.99" value="0.85" step="0.01">
+      </div>
+      <div class="ctrl-row">
+        <label>WALL ABSORPTION <span id="absVal">0.12</span></label>
+        <input type="range" id="abs" min="0.01" max="0.5" value="0.12" step="0.01">
+      </div>
+      <div class="ctrl-row">
+        <label>φ-LOCK RADIUS</label>
+        <div class="btn-row">
+          <button class="btn" onclick="setPhiRadius(1)">φ⁻¹</button>
+          <button class="btn" onclick="setPhiRadius(0)">φ⁰</button>
+          <button class="btn" onclick="setPhiRadius(2)">φ²</button>
+        </div>
+        <label style="margin-top:10px">EARTH RESONANCE PRESETS</label>
+        <div class="btn-row">
+          <button class="btn" onclick="setEarth(1)" title="Schumann fundamental 7.83 Hz">SR1</button>
+          <button class="btn" onclick="setEarth(2)" title="Schumann 2nd harmonic 14.3 Hz">SR2</button>
+          <button class="btn" onclick="setEarth(3)" title="Schumann 3rd harmonic 20.8 Hz">SR3</button>
+        </div>
+        <div class="btn-row" style="margin-top:6px">
+          <button class="btn" onclick="setEarth(4)" title="Alpha/Schumann boundary 8.0 Hz">8Hz</button>
+          <button class="btn" onclick="setEarth(5)" title="Earth inertial 21h mode">21H</button>
+          <button class="btn" onclick="setEarth(6)" title="Three-source geometric resultant of SR1+SR2+SR3 = 13.26 Hz">3SR</button>
+        </div>
+        <div style="font-size:0.55rem;color:var(--dim);margin-top:8px;line-height:1.6">
+          3SR = geometric mean of SR1/SR2/SR3 basin positions (13.26 Hz). SR2 is the half-node pivot (frac 0.528). SR1 and SR3 flank from the forbidden band — same basin geometry as the lepton (+,−,+) sign pattern.
+        </div>
+      </div>
+    </div>
+
+    <div class="ctrl-section">
+      <h3>Simulation</h3>
+      <div class="btn-row" style="margin-bottom:8px">
+        <button class="btn active" id="btnRun" onclick="toggleRun()">RUN</button>
+        <button class="btn" onclick="resetSim()">RESET</button>
+      </div>
+      <div class="ctrl-row">
+        <label>SPEED <span id="speedVal">1.0x</span></label>
+        <input type="range" id="speed" min="0.1" max="3.0" value="1.0" step="0.1">
+      </div>
+    </div>
+
+    <div class="ctrl-section">
+      <h3>Active Modes</h3>
+      <div class="mode-list" id="modeList">
+        <div style="font-size:0.6rem;color:var(--dim)">Modes will appear here...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIZ -->
+  <div class="viz-area">
+    <div class="sphere-container" id="sphereContainer">
+      <canvas id="sphereCanvas"></canvas>
+      <div class="sphere-overlay" id="sphereOverlay">
+        T = <span class="val" id="timeDisp">0.000</span>s<br>
+        λ = <span class="val" id="lambdaDisp">—</span><br>
+        2R/λ = <span class="val" id="ratioDisp">—</span><br>
+        MODES = <span class="val" id="modeCount">0</span><br>
+        NULLS = <span class="val" id="nullCount">0</span>
+      </div>
+      <div class="sphere-legend">
+        <div class="legend-title">LEGEND</div>
+
+        <div class="legend-item">
+          <div class="legend-swatch circle" style="border-color:rgba(200,168,75,0.7)"></div>
+          <span>SPHERE BOUNDARY — confinement wall; single-cycle closure surface</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:rgba(200,168,75,0.6)"></div>
+          <span>STANDING WAVE — source + reflected interference pattern at boundary</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch circle" style="border-color:rgba(0,229,255,0.4)"></div>
+          <span>HARMONIC SHELLS — inner resonance rings; integer-ratio cavity modes</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:rgba(0,255,159,0.7)"></div>
+          <span>NEW MODES — φ-scaled geometry emerging from null interference zones</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:rgba(0,229,255,0.5)"></div>
+          <span>SIGNAL RAYS — propagating wavefronts bouncing inside the sphere</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:rgba(255,51,102,0.6)"></div>
+          <span>NULL RAYS — rays in destructive interference zone; mode collapse active</span>
+        </div>
+
+        <div class="legend-divider"></div>
+
+        <div class="legend-item">
+          <div class="legend-swatch dot" style="background:rgba(200,168,75,0.9)"></div>
+          <span>φ-LOCK POINT — reflection node at φ-resonant boundary position</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch dot" style="background:rgba(0,229,255,0.7)"></div>
+          <span>REFLECTION POINT — wave reflection at sphere wall (non-φ radius)</span>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-swatch dot" style="background:rgba(200,168,75,0.85);width:14px;height:14px;box-shadow:0 0 8px rgba(200,168,75,0.5)"></div>
+          <span>SOURCE ORIGIN — central emission point; glow intensity = composite amplitude</span>
+        </div>
+
+        <div class="legend-divider"></div>
+
+        <div class="legend-item">
+          <div class="legend-swatch dashed" style="width:22px"></div>
+          <span>φ-LOCK RING — appears when radius = φⁿ; single-cycle closure confirmed</span>
+        </div>
+      </div>
+
+      <div class="null-flash" id="nullFlash">PARTIAL NULL</div>
+    </div>
+
+    <div class="waveform-panel">
+      <div class="wave-labels">
+        <div class="wave-label">
+          <div class="wave-label-dot" style="background:var(--gold)"></div>
+          SOURCE
+        </div>
+        <div class="wave-label">
+          <div class="wave-label-dot" style="background:var(--cyan)"></div>
+          REFLECTED
+        </div>
+        <div class="wave-label">
+          <div class="wave-label-dot" style="background:var(--green)"></div>
+          COMPOSITE
+        </div>
+        <div class="wave-label">
+          <div class="wave-label-dot" style="background:var(--red)"></div>
+          NEW MODES
+        </div>
+      </div>
+      <canvas id="waveCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div>SPHERE CIRCUMFERENCE: <span id="circDisp">—</span></div>
+    <div>RESONANT FREQ: <span id="resFreqDisp">—</span></div>
+    <div>NULL DEPTH: <span id="nullDepth">—</span></div>
+    <div>NEW MODES DETECTED: <span id="newModeCount">0</span></div>
+    <div class="phi-badge">φ = 1.6180339887...</div>
+  </div>
+
+</div>
+
+<script>
+const PHI = 1.6180339887;
+const TWO_PI = Math.PI * 2;
+const SPEED_OF_SOUND = 343; // m/s conceptual
+
+// State
+let running = true;
+let t = 0;
+let waveType = 'sine';
+let animId;
+
+// Detected modes
+let modes = [];
+let nullEvents = 0;
+let newModesTotal = 0;
+
+// Waveform history
+const WAVE_LEN = 512;
+let sourceHistory = new Float32Array(WAVE_LEN);
+let reflHistory = new Float32Array(WAVE_LEN);
+let compositeHistory = new Float32Array(WAVE_LEN);
+let newModeHistory = new Float32Array(WAVE_LEN);
+let histIdx = 0;
+
+// Sphere viz: rays
+const NUM_RAYS = 64;
+let rays = [];
+
+function getParams() {
+  return {
+    freq: parseFloat(document.getElementById('freq').value),
+    amp: parseFloat(document.getElementById('amp').value),
+    radius: parseFloat(document.getElementById('rad').value),
+    reflection: parseFloat(document.getElementById('ref').value),
+    absorption: parseFloat(document.getElementById('abs').value),
+    speed: parseFloat(document.getElementById('speed').value),
+  };
+}
+
+function wave(type, phase, amp) {
+  switch(type) {
+    case 'sine': return amp * Math.sin(phase);
+    case 'saw': return amp * (((phase / TWO_PI) % 1 + 1) % 1 * 2 - 1);
+    case 'sq': return amp * (Math.sin(phase) >= 0 ? 1 : -1);
+    default: return amp * Math.sin(phase);
+  }
+}
+
+// Compute what happens inside the sphere
+function computeSphere(p, time) {
+  const { freq, amp, radius, reflection, absorption } = p;
+  
+  // Wavelength (normalized units)
+  const wavelength = SPEED_OF_SOUND / freq;
+  
+  // Time for sound to travel across diameter
+  const travelTime = (2 * radius) / SPEED_OF_SOUND;
+  
+  // Source signal
+  const sourcePhase = TWO_PI * freq * time;
+  const source = wave(waveType, sourcePhase, amp);
+  
+  // Reflected signal — delayed by travel time, attenuated
+  const reflPhase = TWO_PI * freq * (time - travelTime);
+  const reflAmp = amp * reflection * (1 - absorption);
+  const refl = wave(waveType, reflPhase, reflAmp);
+  
+  // Phase relationship between source and reflection
+  const phaseDiff = (TWO_PI * freq * travelTime) % TWO_PI;
+  
+  // Composite (interference)
+  const composite = source + refl;
+  
+  // Resonance ratio: how many wavelengths fit in 2R
+  const resonanceRatio = (2 * radius) / wavelength;
+  
+  // Fractional part — how close to integer resonance
+  const frac = resonanceRatio % 1;
+  const nearResonance = Math.min(frac, 1 - frac); // 0 = perfect resonance
+  
+  // Partial nulling — occurs when phase difference approaches π
+  const nullDepth = Math.cos(phaseDiff); // +1 = constructive, -1 = destructive
+  
+  // New modes emerge from nonlinear mixing at null points
+  // When nulling is severe, the difference frequency and sum frequency emerge
+  const nullStrength = Math.max(0, -nullDepth); // 0 to 1
+  
+  // New mode 1: difference frequency (slower beating)
+  const diffFreq = freq * (1 - nearResonance * 0.5);
+  const newMode1 = nullStrength * amp * 0.4 * Math.sin(TWO_PI * diffFreq * time);
+  
+  // New mode 2: harmonic generated by wall reflection nonlinearity  
+  const harmFreq = freq * (resonanceRatio > 1 ? Math.round(resonanceRatio) / resonanceRatio : 1);
+  const newMode2 = reflection * amp * 0.25 * Math.sin(TWO_PI * harmFreq * time + Math.PI * nearResonance);
+  
+  // New mode 3: φ-mode — emerges when radius is near φ-multiple of wavelength
+  const phiRatio = radius / (wavelength * PHI);
+  const phiProximity = Math.abs(phiRatio - Math.round(phiRatio));
+  const phiMode = (1 - phiProximity * 4) > 0 ? 
+    (1 - phiProximity * 4) * amp * 0.3 * Math.sin(TWO_PI * freq * PHI * time) : 0;
+  
+  const newModes = newMode1 + newMode2 + phiMode;
+  
+  return {
+    source, refl, composite, newModes,
+    wavelength, travelTime, resonanceRatio, phaseDiff,
+    nullDepth, nullStrength, nearResonance,
+    diffFreq, harmFreq, phiMode: Math.abs(phiMode) > 0.05,
+    phiProximity
+  };
+}
+
+// Sphere canvas
+const sphereCanvas = document.getElementById('sphereCanvas');
+const sCtx = sphereCanvas.getContext('2d');
+
+function resizeSphere() {
+  const container = document.getElementById('sphereContainer');
+  sphereCanvas.width = container.clientWidth;
+  sphereCanvas.height = container.clientHeight;
+}
+
+function drawSphere(p, result, time) {
+  const W = sphereCanvas.width;
+  const H = sphereCanvas.height;
+  const cx = W / 2, cy = H / 2;
+  const maxR = Math.min(W, H) * 0.38;
+  const sphereR = maxR * Math.min(p.radius / 2, 1.0);
+  
+  sCtx.clearRect(0, 0, W, H);
+  
+  // Background glow at center
+  const bgGrad = sCtx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 1.2);
+  bgGrad.addColorStop(0, 'rgba(10,10,30,0.8)');
+  bgGrad.addColorStop(1, 'rgba(5,5,8,0)');
+  sCtx.fillStyle = bgGrad;
+  sCtx.fillRect(0, 0, W, H);
+  
+  // Sphere boundary
+  sCtx.beginPath();
+  sCtx.arc(cx, cy, sphereR, 0, TWO_PI);
+  sCtx.strokeStyle = `rgba(200,168,75,${0.3 + 0.2 * Math.abs(result.nullDepth)})`;
+  sCtx.lineWidth = 1.5;
+  sCtx.stroke();
+  
+  // Inner resonance rings (harmonics)
+  for (let i = 1; i <= 4; i++) {
+    const ringR = sphereR * (i / (4 + 1));
+    const alpha = 0.08 + 0.04 * Math.abs(result.composite) * i;
+    sCtx.beginPath();
+    sCtx.arc(cx, cy, ringR, 0, TWO_PI);
+    sCtx.strokeStyle = `rgba(0,229,255,${alpha})`;
+    sCtx.lineWidth = 0.5;
+    sCtx.stroke();
+  }
+  
+  // Standing wave pattern inside sphere
+  const numAngles = 180;
+  sCtx.beginPath();
+  for (let i = 0; i <= numAngles; i++) {
+    const angle = (i / numAngles) * TWO_PI;
+    const freq = p.freq;
+    const standing = result.source * Math.cos(angle * result.resonanceRatio) + 
+                     result.refl * Math.cos(angle * result.resonanceRatio + result.phaseDiff);
+    const r = sphereR * (0.85 + 0.15 * standing / (p.amp * 2 + 0.001));
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    if (i === 0) sCtx.moveTo(x, y); else sCtx.lineTo(x, y);
+  }
+  sCtx.closePath();
+  sCtx.strokeStyle = `rgba(200,168,75,0.6)`;
+  sCtx.lineWidth = 1;
+  sCtx.stroke();
+  
+  // New mode waves — different geometry, emerges from nulls
+  if (Math.abs(result.newModes) > 0.05) {
+    sCtx.beginPath();
+    const modeFreqMult = PHI;
+    for (let i = 0; i <= numAngles; i++) {
+      const angle = (i / numAngles) * TWO_PI;
+      const modeWave = result.newModes * Math.cos(angle * result.resonanceRatio * modeFreqMult);
+      const r = sphereR * (0.7 + 0.12 * modeWave / (p.amp + 0.001));
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) sCtx.moveTo(x, y); else sCtx.lineTo(x, y);
+    }
+    sCtx.closePath();
+    sCtx.strokeStyle = `rgba(0,255,159,${0.3 + 0.4 * Math.abs(result.newModes)})`;
+    sCtx.lineWidth = 1;
+    sCtx.stroke();
+  }
+  
+  // Rays — bouncing signals
+  const now = time * p.freq;
+  for (let i = 0; i < 12; i++) {
+    const baseAngle = (i / 12) * TWO_PI + now * 0.3;
+    const rayPhase = now + i * 0.5;
+    const rayLen = sphereR * (0.3 + 0.5 * ((rayPhase % 1 + 1) % 1));
+    const x2 = cx + rayLen * Math.cos(baseAngle);
+    const y2 = cy + rayLen * Math.sin(baseAngle);
+    
+    const alpha = 0.15 + 0.15 * result.nullStrength;
+    sCtx.beginPath();
+    sCtx.moveTo(cx, cy);
+    sCtx.lineTo(x2, y2);
+    sCtx.strokeStyle = result.nullStrength > 0.5 ? 
+      `rgba(255,51,102,${alpha})` : `rgba(0,229,255,${alpha})`;
+    sCtx.lineWidth = 0.8;
+    sCtx.stroke();
+    
+    // Reflection point
+    if (rayLen > sphereR * 0.8) {
+      const rx = cx + sphereR * Math.cos(baseAngle);
+      const ry = cy + sphereR * Math.sin(baseAngle);
+      sCtx.beginPath();
+      sCtx.arc(rx, ry, 2, 0, TWO_PI);
+      sCtx.fillStyle = result.phiMode ? 'rgba(200,168,75,0.8)' : 'rgba(0,229,255,0.6)';
+      sCtx.fill();
+    }
+  }
+  
+  // Center point
+  const centerGlow = sCtx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+  const centerAlpha = 0.6 + 0.4 * Math.abs(result.composite) / (p.amp * 2 + 0.001);
+  centerGlow.addColorStop(0, `rgba(200,168,75,${centerAlpha})`);
+  centerGlow.addColorStop(1, 'rgba(200,168,75,0)');
+  sCtx.fillStyle = centerGlow;
+  sCtx.beginPath();
+  sCtx.arc(cx, cy, 20, 0, TWO_PI);
+  sCtx.fill();
+  
+  // φ-lock indicator
+  if (result.phiProximity < 0.05) {
+    sCtx.beginPath();
+    sCtx.arc(cx, cy, sphereR + 8, 0, TWO_PI);
+    sCtx.strokeStyle = `rgba(200,168,75,${0.8 * (1 - result.phiProximity * 20)})`;
+    sCtx.lineWidth = 2;
+    sCtx.setLineDash([4, 8]);
+    sCtx.stroke();
+    sCtx.setLineDash([]);
+  }
+}
+
+// Waveform canvas
+const waveCanvas = document.getElementById('waveCanvas');
+const wCtx = waveCanvas.getContext('2d');
+
+function resizeWave() {
+  const panel = document.querySelector('.waveform-panel');
+  waveCanvas.width = panel.clientWidth;
+  waveCanvas.height = panel.clientHeight;
+}
+
+function drawWaveform() {
+  const W = waveCanvas.width;
+  const H = waveCanvas.height;
+  wCtx.clearRect(0, 0, W, H);
+  
+  // Grid
+  wCtx.strokeStyle = 'rgba(26,26,46,0.8)';
+  wCtx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = H * i / 4;
+    wCtx.beginPath();
+    wCtx.moveTo(0, y);
+    wCtx.lineTo(W, y);
+    wCtx.stroke();
+  }
+  
+  // Center line
+  wCtx.strokeStyle = 'rgba(74,74,106,0.5)';
+  wCtx.beginPath();
+  wCtx.moveTo(0, H/2);
+  wCtx.lineTo(W, H/2);
+  wCtx.stroke();
+  
+  const drawWave = (data, color, yScale) => {
+    wCtx.beginPath();
+    wCtx.strokeStyle = color;
+    wCtx.lineWidth = 1.5;
+    for (let i = 0; i < WAVE_LEN; i++) {
+      const idx = (histIdx + i) % WAVE_LEN;
+      const x = (i / WAVE_LEN) * W;
+      const y = H/2 - data[idx] * yScale;
+      if (i === 0) wCtx.moveTo(x, y); else wCtx.lineTo(x, y);
+    }
+    wCtx.stroke();
+  };
+  
+  const scale = H * 0.2;
+  drawWave(sourceHistory, 'rgba(200,168,75,0.7)', scale);
+  drawWave(reflHistory, 'rgba(0,229,255,0.6)', scale);
+  drawWave(compositeHistory, 'rgba(0,255,159,0.8)', scale * 0.6);
+  drawWave(newModeHistory, 'rgba(255,51,102,0.9)', scale * 1.2);
+}
+
+// Mode tracking
+function updateModes(result, p) {
+  const freq = p.freq;
+  
+  // Check for existing modes
+  const sourceMode = { freq: freq, type: 'source', amp: p.amp };
+  const harmMode = { freq: result.harmFreq, type: 'new', amp: p.reflection * p.amp * 0.25 };
+  const diffMode = { freq: result.diffFreq, type: 'new', amp: result.nullStrength * p.amp * 0.4 };
+  
+  modes = [sourceMode];
+  if (Math.abs(result.harmFreq - freq) > 1) modes.push(harmMode);
+  if (result.nullStrength > 0.3) modes.push(diffMode);
+  if (result.phiMode) modes.push({ freq: freq * PHI, type: 'new', amp: 0.3 * p.amp });
+  if (result.nullStrength > 0.6) {
+    modes.push({ freq: freq * 2, type: 'null', amp: 0 });
+    nullEvents++;
+  }
+  
+  newModesTotal = modes.filter(m => m.type === 'new').length;
+  
+  // Render
+  const list = document.getElementById('modeList');
+  list.innerHTML = modes.map(m => `
+    <div class="mode-item ${m.type}">
+      <div class="mode-dot" style="background:${m.type==='source'?'var(--gold)':m.type==='new'?'var(--cyan)':'var(--red)'}"></div>
+      <span>${m.freq.toFixed(1)} Hz</span>
+      <span style="color:var(--dim)">${m.type.toUpperCase()}</span>
+      <span style="color:var(--cyan)">${(m.amp * 100).toFixed(0)}%</span>
+    </div>
+  `).join('');
+}
+
+// Update displays
+function updateDisplays(p, result) {
+  document.getElementById('freqVal').textContent = p.freq < 20 ? p.freq.toFixed(2) : p.freq.toFixed(0) + ' Hz';
+  document.getElementById('ampVal').textContent = p.amp.toFixed(2);
+  document.getElementById('radVal').textContent = p.radius.toFixed(3);
+  document.getElementById('refVal').textContent = p.reflection.toFixed(2);
+  document.getElementById('absVal').textContent = p.absorption.toFixed(2);
+  document.getElementById('speedVal').textContent = p.speed.toFixed(1) + 'x';
+  
+  document.getElementById('timeDisp').textContent = t.toFixed(3);
+  document.getElementById('lambdaDisp').textContent = result.wavelength.toFixed(3) + 'm';
+  document.getElementById('ratioDisp').textContent = result.resonanceRatio.toFixed(3);
+  document.getElementById('modeCount').textContent = modes.length;
+  document.getElementById('nullCount').textContent = nullEvents;
+  
+  document.getElementById('circDisp').textContent = (TWO_PI * p.radius).toFixed(3) + 'm';
+  document.getElementById('resFreqDisp').textContent = 
+    (SPEED_OF_SOUND / (2 * p.radius)).toFixed(1) + ' Hz';
+  document.getElementById('nullDepth').textContent = 
+    (result.nullDepth * 100).toFixed(1) + '%';
+  document.getElementById('newModeCount').textContent = newModesTotal;
+  
+  // Null flash
+  const flash = document.getElementById('nullFlash');
+  flash.style.opacity = result.nullStrength > 0.5 ? result.nullStrength.toFixed(2) : '0';
+}
+
+let frame = 0;
+const DT = 1 / 60;
+
+function tick() {
+  if (!running) { animId = requestAnimationFrame(tick); return; }
+  
+  const p = getParams();
+  t += DT * p.speed * 0.1;
+  frame++;
+  
+  const result = computeSphere(p, t);
+  
+  // Store history
+  sourceHistory[histIdx] = result.source;
+  reflHistory[histIdx] = result.refl;
+  compositeHistory[histIdx] = result.composite;
+  newModeHistory[histIdx] = result.newModes;
+  histIdx = (histIdx + 1) % WAVE_LEN;
+  
+  // Draw
+  drawSphere(p, result, t);
+  drawWaveform();
+  
+  // Update modes every 10 frames
+  if (frame % 10 === 0) updateModes(result, p);
+  
+  // Update displays every 5 frames
+  if (frame % 5 === 0) updateDisplays(p, result);
+  
+  animId = requestAnimationFrame(tick);
+}
+
+// Controls
+function toggleRun() {
+  running = !running;
+  const btn = document.getElementById('btnRun');
+  btn.textContent = running ? 'RUN' : 'PAUSE';
+  btn.classList.toggle('active', running);
+}
+
+function resetSim() {
+  t = 0;
+  nullEvents = 0;
+  newModesTotal = 0;
+  modes = [];
+  sourceHistory.fill(0);
+  reflHistory.fill(0);
+  compositeHistory.fill(0);
+  newModeHistory.fill(0);
+  histIdx = 0;
+}
+
+function setWave(type) {
+  waveType = type;
+  ['Sine','Saw','Sq'].forEach(w => {
+    document.getElementById('btn'+w).classList.toggle('active', type === w.toLowerCase());
+  });
+}
+
+function setPhiRadius(n) {
+  const r = Math.pow(PHI, n);
+  document.getElementById('rad').value = r;
+  document.getElementById('radVal').textContent = r.toFixed(3);
+}
+
+function setEarth(preset) {
+  const PHI = 1.6180339887;
+  const presets = {
+    1: { freq: 7.83,  radius: 1.618, ref: 0.92, abs: 0.05, label: 'SR1 — Schumann fundamental 7.83 Hz' },
+    2: { freq: 14.3,  radius: 1.618, ref: 0.90, abs: 0.06, label: 'SR2 — Schumann 2nd harmonic 14.3 Hz' },
+    3: { freq: 20.8,  radius: 1.618, ref: 0.88, abs: 0.07, label: 'SR3 — Schumann 3rd harmonic 20.8 Hz' },
+    4: { freq: 8.0,   radius: 1.000, ref: 0.91, abs: 0.05, label: '8 Hz — Alpha/Schumann boundary' },
+    5: { freq: 11.76, radius: 2.618, ref: 0.93, abs: 0.04, label: '21h solar mode — 1/21h = 0.0476 mHz scaled to audible' },
+    6: { freq: 13.26, radius: PHI, ref: 0.90, abs: 0.05, label: 'Three-source geometric resultant — SR1/SR2/SR3 basin centroid = 13.26 Hz' },
+  };
+  const p = presets[preset];
+  if (!p) return;
+  document.getElementById('freq').value = p.freq;
+  document.getElementById('rad').value = p.radius;
+  document.getElementById('ref').value = p.ref;
+  document.getElementById('abs').value = p.abs;
+  document.getElementById('freqVal').textContent = p.freq.toFixed(2) + ' Hz';
+  document.getElementById('radVal').textContent = p.radius.toFixed(3);
+  document.getElementById('refVal').textContent = p.ref.toFixed(2);
+  document.getElementById('absVal').textContent = p.abs.toFixed(2);
+  resetSim();
+  console.log('Earth preset:', p.label);
+}
+
+// Sliders live update labels
+['freq','amp','rad','ref','abs','speed'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    const p = getParams();
+    document.getElementById('freqVal').textContent = p.freq < 20 ? p.freq.toFixed(2) + ' Hz' : p.freq.toFixed(0) + ' Hz';
+    document.getElementById('ampVal').textContent = p.amp.toFixed(2);
+    document.getElementById('radVal').textContent = p.radius.toFixed(3);
+    document.getElementById('refVal').textContent = p.reflection.toFixed(2);
+    document.getElementById('absVal').textContent = p.absorption.toFixed(2);
+    document.getElementById('speedVal').textContent = p.speed.toFixed(1) + 'x';
+  });
+});
+
+// Init
+window.addEventListener('resize', () => { resizeSphere(); resizeWave(); });
+resizeSphere();
+resizeWave();
+tick();
+</script>
+</body>
+</html>
